@@ -63,5 +63,13 @@ def sign_up():
             flash('You successfully logged in', category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('views.home'))
-
     return render_template("sign_up.html", user = current_user)
+
+@auth.route('/', methods=['GET','POST'])
+def home():
+     return render_template("home.html")
+     
+@auth.route('/register', methods=['GET','POST'])
+def register():
+     return render_template("register.html")
+    

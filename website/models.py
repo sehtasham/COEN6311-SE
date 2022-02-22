@@ -3,10 +3,13 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 
-class Note(db.Model):
+class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    source_name = db.Column(db.String(10000))
+    destination_name = db.Column(db.String(10000))
+    departure_date = db.Column(db.DateTime(timezone=True), default=func.now())
+    return_date = db.Column(db.DateTime(timezone=True), default=func.now())
+    price = db.Column(db.Numeric(10,2))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
@@ -16,4 +19,4 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200),  nullable=False)
     first_name = db.Column(db.String(200),  nullable=False)
     #admin = db.Column(db.Boolean, nullable=True, default=False)
-    notes = db.relationship('Note')
+    tiket = db.relationship('Ticket')
