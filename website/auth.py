@@ -1,4 +1,4 @@
-from crypt import methods
+#from crypt import methods
 from .validations import *
 from unicodedata import category
 from xmlrpc.client import boolean

@@ -1,0 +1,66 @@
+{% extends "base.html" %} 
+{% block title %}search{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <h3 align="center">Find your tour</h3>
+    <div class="form-group">
+        <label for="sourceLocation">From</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="sourceLocation"
+        name="sourceLocation"
+        placeholder="Enter Source Location"/>
+    </div>
+    <div class="form-group">
+        <label for="destinationLocation">To</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="destinationLocation"
+        name="destinationLocation"
+        placeholder="Enter Destination Location"/>
+    </div>
+    <div class="form-group">
+        <label for="departureDate">Departure Date</label>
+        <input 
+        type="date" 
+        class="form-control"
+        id="departureDate"
+        name="departureDate"
+        placeholder="Enter the date (yyyy-mm-dd)"/>
+    </div>
+    <div class="form-group">
+        <label for="returnDate">Return Date</label>
+        <input 
+        type="date" 
+        class="form-control"
+        id="returnDate"
+        name="returnDate"
+        placeholder="Enter the date (yyyy-mm-dd)"/>
+    </div>
+    <div class="form-group">
+        <label for="adults">Enter the number</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="adults"
+        name="adults"
+        placeholder="1"/>
+    </div>
+    <div class="form-group">
+        <label for="children">Enter the number</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="children"
+        name="children"
+        placeholder="1"/>
+    </div>
+    
+    <br/>
+    <button type="search" class="btn btn-primary">Search</button>
+     
+</form>
+{% endblock %}
