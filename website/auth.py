@@ -57,7 +57,7 @@ def sign_up():
         elif not password_validation(password)[0]:
             flash(password_validation(password)[1], category='error' )
         else:
-            new_user = User(email = email, first_name=first_name, password=generate_password_hash(password, method='sha256'))
+            new_user = User(email = email, firstname=first_name, password=generate_password_hash(password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             flash('You successfully logged in', category='success')
