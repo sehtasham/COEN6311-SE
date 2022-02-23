@@ -1,4 +1,4 @@
-from crypt import methods
+#from crypt import methods
 from .validations import *
 from unicodedata import category
 from xmlrpc.client import boolean
@@ -57,11 +57,19 @@ def sign_up():
         elif not password_validation(password)[0]:
             flash(password_validation(password)[1], category='error' )
         else:
-            new_user = User(email = email, first_name=first_name, password=generate_password_hash(password, method='sha256'))
+            new_user = User(email = email, firstname=first_name, password=generate_password_hash(password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             flash('You successfully logged in', category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('views.home'))
-
     return render_template("sign_up.html", user = current_user)
+
+@auth.route('/', methods=['GET','POST'])
+def home():
+     return render_template("home.html")
+     
+@auth.route('/register', methods=['GET','POST'])
+def register():
+     return render_template("register.html")
+    
