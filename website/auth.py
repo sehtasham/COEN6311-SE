@@ -1,8 +1,13 @@
+from ast import Return
 from crypt import methods
+from ctypes import addressof
+
+from urllib3 import Retry
 from .validations import *
 from unicodedata import category
 from xmlrpc.client import boolean
-from flask import Blueprint, render_template,request, flash, redirect, url_for
+from flask import Blueprint, render_template,request, flash, redirect, url_for,Response
+from flask import json
 from . import db
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,7 +15,6 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 
 auth = Blueprint('auth', __name__)
-
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
@@ -24,15 +28,15 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again', category='error')
-        else:
-            flash('Email does not exist', category='error')
-
-    return render_template("login.html", user = current_user)
+                flash('Incorrect password, try again', category='error') 
+        else: 
+            flash('Email does not exist!', category='error')
+    return render_template("login2.html", user = current_user)
 
 @auth.route('/logout')
 @login_required
 def logout():
+    flash('logged out successfully', category='success')
     logout_user()
     return redirect(url_for('auth.login'))
 
@@ -43,6 +47,14 @@ def sign_up():
         first_name = request.form.get('firstName')
         password = request.form.get('password')
         confirmed_password = request.form.get('confirmedPassword')
+        gender = request.form.get('confirmedPassword')
+        
+        phone = request.form.get('phone')
+        birthday = request.form.get('birthday')
+        adress = request.form.get('adress')
+        city = request.form.get('city')
+        country = request.form.get('country')
+        postal = request.form.get('postal')
         #userType = request.form.get('admin')
         
         user = User.query.filter_by(email=email).first()
@@ -57,13 +69,23 @@ def sign_up():
         elif not password_validation(password)[0]:
             flash(password_validation(password)[1], category='error' )
         else:
-            new_user = User(email = email, first_name=first_name, password=generate_password_hash(password, method='sha256'))
+            new_user = User(email = email,
+                            first_name=first_name,
+                            password=generate_password_hash(password, method='sha256'),
+                            #gender=gender,
+                            #phonenumber=phone,
+                            #birthday=birthday,
+                            #address= adress,
+                            #city=city,
+                            #country=country,
+                            #postalcode=postal 
+                            )
             db.session.add(new_user)
             db.session.commit()
-            flash('You successfully logged in', category='success')
+            flash('You successfully signed up and also logged in!', category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('views.home'))
-    return render_template("sign_up.html", user = current_user)
+    return render_template("sign_up2.html", user = current_user)
 
 @auth.route('/', methods=['GET','POST'])
 def home():

@@ -1,20 +1,6 @@
-{% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
+{% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{category}}">Message: {{ message }}</div>
+{% endfor %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +17,8 @@
     <link rel="stylesheet" href="static/css/style2.css">
 </head>
 <body>
-
+   
+   
     <div class="main2">
         <!-- Sing in  Form -->
         <section class="sign-in">
@@ -43,10 +30,10 @@
                         <a id="home" href="/" class="signup-image-link">Back to home</a>
                     </div>
 
-                    <div class="signin-form">
+                    <div class="signin-form2">
                         <h2 class="form-title">Login</h2>
                         <form method="POST" 
-                        class="register-form" 
+                        class="register-form2" 
                         id="login-form">
                             <div class="form-group">
                                 <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -72,9 +59,9 @@
                             </div>
                             <div class="form-group form-button">
                                 <input type="submit" 
-                                name="login" 
-                                id="login" 
-                                class="form-submit" 
+                                name="login2" 
+                                id="login2" 
+                                class="form-submit2" 
                                 value="Log in"/>
                             </div>
                         </form>
