@@ -1,2 +1,2 @@
 # COEN6311-SE
-Software Engineering Course
+Software Engineering Course from concordia university.
