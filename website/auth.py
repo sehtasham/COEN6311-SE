@@ -68,8 +68,13 @@ def sign_up():
 @auth.route('/', methods=['GET','POST'])
 def home():
      return render_template("home.html")
+ 
      
-@auth.route('/register', methods=['GET','POST'])
-def register():
-     return render_template("register.html")
-    
+@auth.route('/contacts', methods=['GET','POST'])
+def contacts():
+     return render_template("contacts.html")
+     
+@auth.route('/aboutus', methods=['GET','POST'])
+def aboutus():
+     return render_template("about-us.html")  
+     
