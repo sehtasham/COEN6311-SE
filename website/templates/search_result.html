@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% block title %}search{% endblock %}
+
+{% block content %}
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<h2>Search Result</h2>
+<table>
+    <tr>
+      <th>Source Location</th>
+      <th>Destination Location</th>
+      <th>Departure Date</th>
+      <th>Return Date</th>
+      <th>Adults</th>
+      <th>Children</th>
+    </tr>
+    <tr>
+      <td>{{messages['sLocation']}}</td>
+      <td>{{messages['dLocation']}}</td>
+      <td>{{messages['dDate']}}</td>
+      <td>{{messages['rDate']}}</td>
+      <td>{{messages['nAdults']}}</td>
+      <td>{{messages['nChildren']}}</td>
+    </tr>
+  </table>
+  
+{% endblock %}
