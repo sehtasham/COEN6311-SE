@@ -11,38 +11,30 @@ class Ticket(db.Model):
     return_date = db.Column(db.DateTime(timezone=True), default=func.now())
     price = db.Column(db.Numeric(10,2))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'))
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(60), unique=True, nullable=False)
-    firstname = db.Column(db.String(50), nullable=False)
-    lastname = db.Column(db.String(50))
-    password = db.Column(db.String(32),  nullable=False)
-    gender = db.Column(db.String(10))
-    phonenumber = db.Column(db.BigInteger)
-    birthday = db.Column(db.Date())
-    address = db.Column(db.String(50))
-    city = db.Column(db.String(50))
-    country = db.Column(db.String(50))
-    postalcode = db.Column(db.String(10))
-    isadmin = db.Column(db.Boolean, nullable=True, default=False)
-    notes = db.relationship('Note')
-
-class Ticket(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    source = db.Column(db.String(50), nullable=False)
-    destination = db.Column(db.String(50), nullable=False)
-    departureDate = db.Column(db.Date(), nullable=False)
-    arrivalDate = db.Column(db.Date(), nullable=False)
-    starttime = db.Column(db.Time())
-    arrivaltime = db.Column(db.Time())
-    airline = db.Column(db.String(50))
-    firstqty = db.Column(db.Integer)
-    availableqty = db.Column(db.Integer)
-    notes = db.relationship('Note')
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(200),  nullable=False)
     first_name = db.Column(db.String(200),  nullable=False)
     #admin = db.Column(db.Boolean, nullable=True, default=False)
     tiket = db.relationship('Ticket')
+
+
+class Flight(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sourceLocation = db.Column(db.String(200), nullable=False)
+    destinationLocation = db.Column(db.String(200), nullable=False)
+    departureDate = db.Column(db.Date(), nullable=False)
+    returnDate = db.Column(db.Date(), nullable=False)
+    adults = db.Column(db.String(200), nullable=False)
+    children = db.Column(db.String(200), nullable=False)
+    notes = db.relationship('Note')
+
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.String(10000))
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    flight_id = db.Column(db.Integer, db.ForeignKey('flight.id'))
