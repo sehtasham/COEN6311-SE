@@ -100,3 +100,13 @@ def contacts():
 def aboutus():
      return render_template("about-us.html")  
      
+@auth.route('/user-account', methods=['GET','POST'])
+def user_account():
+      
+    heading = ("Name","Family","Address","Phone")
+
+    data = (("Maryam","Ekhlasi","Montreal","4389909875"),
+    ("Maryam1","Ekhlasi1","Montreal1","4389909875"),
+    ("Maryam2","Ekhlasi2","Montreal2","4389909875"))
+
+    return render_template("user_account.html", heading=heading, data=data) 
