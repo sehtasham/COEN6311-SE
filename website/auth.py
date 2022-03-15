@@ -110,3 +110,22 @@ def user_account():
     ("Maryam2","Ekhlasi2","Montreal2","4389909875"))
 
     return render_template("user_account.html", heading=heading, data=data) 
+
+@auth.route('/search', methods=['GET'])
+def dropdown():
+    seat_type = ['Business', 'Economy', 'Permium']
+    return render_template('search.html', seat_type=seat_type, user = current_user)
+
+@auth.route('/search', methods=['POST'])
+def search_post():
+    if request.method == 'POST':
+        heading = ("Name","Price","Type","Note")
+        data = (("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
+                ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
+                ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
+                ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"),
+                ("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
+                ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
+                ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
+                ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"))
+    return render_template("search_result.html", heading=heading, data=data) 
