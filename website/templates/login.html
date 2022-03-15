@@ -1,89 +1,44 @@
-{% for category, message in get_flashed_messages(with_categories=True) %}
-  <div class="alert alert-{{category}}">Message: {{ message }}</div>
-{% endfor %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form by Colorlib</title>
-
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
-    <!-- Main css -->
-    <link rel="stylesheet" href="static/css/style2.css">
-</head>
-<body>
-   
-   
-    <div class="main2">
-        <!-- Sing in  Form -->
-        <section class="sign-in">
-            <div class="container">
-                <div class="signin-content">
-                    <div class="signin-image">
-                        <figure><img src="static/images/signin-image.jpg" alt="sing up image"></figure>
-                        <a id="register" href="/sign-up" class="signup-image-link">Create an account</a>
-                        <a id="home" href="/" class="signup-image-link">Back to home</a>
-                    </div>
-
-                    <div class="signin-form2">
-                        <h2 class="form-title">Login</h2>
-                        <form method="POST" 
-                        class="register-form2" 
-                        id="login-form">
-                            <div class="form-group">
-                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" 
-                                name="email" 
-                                id="email" 
-                                placeholder="Enter email"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" 
-                                name="password" 
-                                id="passwrod" 
-                                placeholder="Enter your password"/>
-                            </div>
-                            <div class="form-group" style="display: none;">
-                                <input type="checkbox" 
-                                name="remember-me" 
-                                id="remember-me" 
-                                class="agree-term" />
-                                <label for="remember-me" 
-                                class="label-agree-term"><span><span></span></span>Remember me</label>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" 
-                                name="login2" 
-                                id="login2" 
-                                class="form-submit2" 
-                                value="Log in"/>
-                            </div>
-                        </form>
-                       <!--asd <div class="social-login">
-                            <span class="social-label">Or login with</span>
-                            <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+<div class="row row-fix justify-content-sm-center justify-content-lg-end">
+  <div class="col-lg-6 col-xxl-5">
+    <div class="form-request form-request-modern bg-gray-lighter novi-background">
+      <h4>Login</h4>
+      <!-- RD Mailform-->
+      
+        <div class="row row-20 row-fix">
+          <div class="col-sm-12">
+            <label class="form-label-outside">Email</label>
+            <div class="form-wrap form-wrap-inline">
+              <input class="form-input select-filter" name="email" id="email" type="email" data-placeholder="All" data-minimum-results-for-search="Infinity">
             </div>
-        </section>
-
-    </div>
-
-
+          </div>
+          <div class="col-sm-12">
+            <label class="form-label-outside">password</label>
+            <div class="form-wrap form-wrap-iPline">
+                <input class="form-input select-filter" name="password" type="password" id="password" data-placeholder="All" data-minimum-results-for-search="Infinity">
+            </div>
+          </div>
+        
+        </div>
+       
      
-    <!-- JS -->
-    <script src="static/vendor/jquery/jquery.min.js"></script>
-    <script src="static/js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+        <div class="form-wrap form-button">
+          <input type="submit" 
+          name="login" 
+          id="login2" 
+          class="button button-block button-secondary alertifly-button" 
+          value="Log in"/>
+      </div>
+
+
+           
+          
+      <a id="regissign-up" href="/sign-up" class="signup-image-link">Create a new acount</a>            
+
+        </div>
+      
+    </div>
+  </div>
+{% endblock %}

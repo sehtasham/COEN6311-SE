@@ -25,6 +25,21 @@
 <body>
 
   <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
     .alert-error {
         padding: 12px;
         border-radius: 3px;
@@ -172,35 +187,29 @@
           <div class="row row-fix justify-content-sm-center justify-content-lg-end">
             <div class="col-lg-6 col-xxl-5">
               <div class="form-request form-request-modern bg-gray-lighter novi-background">
-                <h4>Login</h4>
+                <h4>Result of Search ticket</h4>
                 <!-- RD Mailform-->
                 <form class="rd-mailform form-fix">
-                  <div class="row row-20 row-fix">
-                    <div class="col-sm-12">
-                      <label class="form-label-outside">Email</label>
-                      <div class="form-wrap form-wrap-inline">
-                        <input class="form-input select-filter" name="email"  id="email"  type= "email" data-placeholder="All" data-minimum-results-for-search="Infinity" >
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <label class="form-label-outside">password</label>
-                      <div class="form-wrap form-wrap-iPline">
-                          <input class="form-input select-filter"  name="password"  type = "password" id="passwrod"   data-placeholder="All" data-minimum-results-for-search="Infinity" >
-                      </div>
-                    </div>
-                  
+                  <div class="row row-20 row-fix">             
                   </div>
-                 
-                    <div class="form-wrap form-button">
-                          <input type="submit" 
-                          name="login" 
-                          id="login" 
-                          class="button button-block button-secondary" 
-                          value="Log in"/>
-                      </div>
+             
 
-                     
-                      <a id="regissign-up" href="/sign-up" class="signup-image-link">Create a new acount</a>
+                  <table>
+                    <tr>
+                      <th>blah</th>
+                      <th>blah</th>
+                      <th>blah</th>
+                      <th><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">select this tickets</a></th>
+                    </tr>
+                    <tr>
+                      <th>blah2</th>
+                      <th>blah2</th>
+                      <th>blah2</th>
+                      <th><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">select this tickets</a></th>
+                    </tr>
+                  </table>
+                      
+
                       
 
                   </div>
@@ -245,6 +254,17 @@
 <script src="static/js/script.js"></script>
 <script src="static/vendor/jquery/jquery.min.js"></script>
 <script src="static/js/main.js"></script>
+
+
+
+<script type="text/javascript">
+  $(document).on('submit','.form-wrap.form-button',function(e)
+                 {
+    console.log('hello');
+    e.preventDefault();
+   
+  });
+</script>
 <!-- coded by barber-->
 </body>
 </html>

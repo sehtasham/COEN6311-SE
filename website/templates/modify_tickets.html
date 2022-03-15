@@ -6,31 +6,17 @@
 <html class="wide wow-animation" lang="en">
 <head>
   <!-- Site Title-->
-  <title>{% block title %} {% endblock %} </title>
+  <title>Home</title>
   <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta charset="utf-8"> 
+  <meta charset="utf-8">
   <link rel="icon" href="static/images/logo-inverse-208x46.ico" type="image/x-icon">
   <!-- Stylesheets -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald:200,400%7CLato:300,400,300italic,700%7CMontserrat:900">
   <link rel="stylesheet" href="static/css/bootstrap.css">
-
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald:200,400%7CLato:300,400,300italic,700%7CMontserrat:900">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
- 
-  
   <link rel="stylesheet" href="static/css/style.css">
   <link rel="stylesheet" href="static/css/fonts.css">
-  <link rel="stylesheet" href="static/themes/alertify.core.css">
-  <link rel="stylesheet" href="static/themes/alertify.bootstrap.css" id="toggleCSS">  
-
- 
-
-
   <!--[if lt IE 10]>
   <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
   <script src="js/html5shiv.min.js"> </script>
@@ -39,183 +25,21 @@
 <body>
 
   <style>
-    .accordion_one .panel-group {
-      border: 1px solid #f1f1f1;
-      margin-top: 100px
-  }
-  
-  a:link {
-      text-decoration: none
-  }
-  
-  .accordion_one .panel {
-      background-color: transparent;
-      box-shadow: none;
-      border-bottom: 0px solid transparent;
-      border-radius: 0;
-      margin: 0
-  }
-  
-  .accordion_one .panel-default {
-      border: 0
-  }
-  
-  .accordion-wrap .panel-heading {
-      padding: 0px;
-      border-radius: 0px
-  }
-  
-  h4 {
-      font-size: 18px;
-      line-height: 24px
-  }
-  
-  .accordion_one .panel .panel-heading a.collapsed {
-      color: #999999;
-      display: block;
-      padding: 12px 30px;
-      border-top: 0px
-  }
-  
-  .accordion_one .panel .panel-heading a {
-      display: block;
-      padding: 12px 30px;
-      background: #fff;
-      color: #313131;
-      border-bottom: 1px solid #f1f1f1
-  }
-  
-  .accordion-wrap .panel .panel-heading a {
-      font-size: 14px
-  }
-  
-  .accordion_one .panel-group .panel-heading+.panel-collapse>.panel-body {
-      border-top: 0;
-      padding-top: 0;
-      padding: 25px 30px 30px 35px;
-      background: #fff;
-      color: #999999
-  }
-  
-  .img-accordion {
-      width: 81px;
-      float: left;
-      margin-right: 15px;
-      display: block
-  }
-  
-  .accordion_one .panel .panel-heading a.collapsed:after {
-      content: "\2b";
-      color: #999999;
-      background: #f1f1f1
-  }
-  
-  .accordion_one .panel .panel-heading a:after,
-  .accordion_one .panel .panel-heading a.collapsed:after {
-      font-family: 'FontAwesome';
-      font-size: 15px;
-      width: 36px;
-      line-height: 48px;
-      text-align: center;
-      background: #F1F1F1;
-      float: left;
-      margin-left: -31px;
-      margin-top: -12px;
-      margin-right: 15px
-  }
-  
-  .accordion_one .panel .panel-heading a:after {
-      content: "\2212"
-  }
-  
-  .accordion_one .panel .panel-heading a:after,
-  .accordion_one .panel .panel-heading a.collapsed:after {
-      font-family: 'FontAwesome';
-      font-size: 15px;
-      width: 36px;
-      height: 48px;
-      line-height: 48px;
-      text-align: center;
-      background: #F1F1F1;
-      float: left;
-      margin-left: -31px;
-      margin-top: -12px;
-      margin-right: 15px
-  }
-    
-    .active {
-    
-      background: #FFFFFF;
-      border: 1px solid #C7C4C4;
-      
-      height: auto;
-      margin-bottom: 25px;
-    
-    }
-    .rotate{
-      transform: rotate(180deg)
-    }
-    .global-label{
-      color:#365A5E;
-      width:100%;
-      height:35px;
-      border-bottom: solid 2px #C4C1C1;
-      margin-bottom: 35px;
-    }
-    .global-label-text{
-      font-size:18px;
-      font-weight:700;
-      color:#365A5E;
-    }
-    .score{
-      display:none;
-      color:#00ff2a;
-      padding:15px;
-      width:45px;
-      height:25px;
-      margin: 45px auto;
-      text-align:center;
-      padding: 5px;
-      justify-content:center;
-      align-items:center;
-      border-radius:5px;
-      background:white;
-    }
-    .about-me{
-      border-radius:5px;
-      width:300px;
-      margin:auto;
-      color:white;
-      text-align:center;
-      background:#ffff;
-      padding:7px 18px;
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
     }
     
-    .dropdown {
-      position: relative;
-      display: inline-block;
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
     }
     
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      padding: 12px 16px;
-      z-index: 1;
+    tr:nth-child(even) {
+      background-color: #dddddd;
     }
-    
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-  
-
-    .dropdown-menu.show{
-      transform: translate3d(15px, 50px, 0px) !important;
-    }
-
-
     .alert-error {
         padding: 12px;
         border-radius: 3px;
@@ -242,10 +66,6 @@
         border: 2px solid orange;
         background-color: yellow;
         color: black;
-      }
-      .alertify-logs{ 
-        width: 800px;    
-        font-size: xx-large;
       }
 </style>
 
@@ -317,48 +137,24 @@
             <!-- RD Navbar Toggle-->
             <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
             <!-- RD Navbar Brand-->
-            <div class="rd-navbar-brand"><a class="brand-name" id="home" href="/"><img class="logo-default" src="static/images/logo-default-208x46.png" alt="" width="120" height="46"/><img class="logo-inverse" src="images/logo-inverse-208x46.ico" alt="" width="120" height="46"/></a></div>
+            <div class="rd-navbar-brand"><a class="brand-name" id="home" href="/"><img class="logo-default" src="static/images/logo-default-208x46.png" alt="" width="120" height="46"/><img class="logo-inverse" src="images/logo-inverse-208x46.png" alt="" width="120" height="46"/></a></div>
           </div>
           <div class="rd-navbar-aside-center">
             <div class="rd-navbar-nav-wrap">
               <!-- RD Navbar Nav-->
               <ul class="rd-navbar-nav">
-                <li  {% block home_active %} {% endblock %}><a id="home" href="/">Home</a>
+                <li class="active"><a id="home" href="/">Home</a>
                 </li>
-                <li  {% block about_us_active %} {% endblock %}><a id="about-us" href="/aboutus">About Us</a>
+                <li><a id="about-us" href="/aboutus">About Us</a>
                 </li>
-                <li  {% block contacts_active %} {% endblock %}><a id="contacts" href="/contacts">Contacts</a>
+                <li><a id="contacts" href="/contacts">Contacts</a>
                 </li> 
-
-                  {% block rd_navbar_nav_active %} {% endblock %}
-                 
-                <li {% block faq_active %} {% endblock %}>
-                <a href="/faq"><i class="fa fa-question-circle" style="font-size:35px" ></i></a>
-              </li> 
-                
-            </ul>
+                </li>
+              </ul>
+            </div>
           </div>
-         
+          <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" id="login" href="/sign-up">Sign up</a></div>
         </div>
-        {% if session['_user_id'] %}
-
-        <li class=  "rd-navbar-aside-right dropdown">
-          <a href="#" class="dropdown-toggle button button-sm button-secondary button-nina" data-toggle="dropdown" role="button" aria-expanded="false">  {{session['user_name']}}<span class="caret"></span></a>
-         
-           <ul class="dropdown-menu">
-             <li class= "dropdown-header" style="text-align: -webkit-center;">Dashboard</li>
-             <li style="text-align: -webkit-center;"><a href="/logout" > Log out </a></li>
-             <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/profile" > Edit profile</a></li>
-                          
-           </ul>
-       
-  
-          {% else %}
-          <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" href="/login">Sign in</a></div>
-        </div>
-
-        {% endif %}
-     
       </nav>
     </div>
   </header>
@@ -376,6 +172,7 @@
                 <div class="row row-fix justify-content-sm-center justify-content-md-start">
                     <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
                       <h3>Better, Faster, Cheaper</h3>
+                      <div class="divider divider-decorate"></div>
                       <p class="text-spacing-sm"></p></div>
                   </div>
               </div>
@@ -387,13 +184,39 @@
       </div>
       <form method="POST">
         <div class="container container-bigger form-request-wrap form-request-wrap-modern">
-          
-           
-           
-           
-                {% block content %} {% endblock %}
-            
-        
+          <div class="row row-fix justify-content-sm-center justify-content-lg-end">
+            <div class="col-lg-6 col-xxl-5">
+              <div class="form-request form-request-modern bg-gray-lighter novi-background">
+                <h4> Adding edit or remove tickets </h4>
+
+                <h6> you can select a ticket </h4>
+                <!-- RD Mailform-->
+                <form class="rd-mailform form-fix">
+                  <div class="row row-20 row-fix">             
+                  </div>
+ 
+
+                  <table>
+                    <tr>
+                      <th>blah</th>
+                      <th>blah</th>
+                      <th>blah</th>
+                      <th><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">edit</a></th>
+                      <th><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">remove</a></th>
+                    </tr>
+                    <tr>
+                      <th>blah2</th>
+                      <th>blah2</th>
+                      <th>blah2</th>
+                      <th><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">edit</a></th>
+                      <th><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">remove</a></th>
+
+                    </tr>
+                  </table>
+
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -411,7 +234,7 @@
   <footer class="section page-footer page-footer-minimal novi-background bg-cover text-center bg-gray-darker">
     <div class="container container-wide">
       <div class="row row-fix justify-content-sm-center align-items-md-center row-30">
-        <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left"><a id="home" href="/"><img class="inverse-logo" src="static/images/logo-inverse-208x46.ico" alt="" width="150" height="46"/></a></div>
+        <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left"><a id="home" href="/"><img class="inverse-logo" src="static/images/logo-inverse-208x46.png" alt="" width="150" height="46"/></a></div>
         <div class="col-md-10 col-lg-7 col-xl-4">
           <p class="right">&#169;&nbsp;<span class="copyright-year"></span> All Rights Reserved. Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a></p>
         </div>
@@ -428,58 +251,22 @@
 </div>
 <!-- Global Mailform Output-->
 <div class="snackbars" id="form-output-global"> </div>
-<!-- Javascript <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script> -->
-
+<!-- Javascript-->
 <script src="static/js/core.min.js"></script>
 <script src="static/js/script.js"></script>
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/js/main.js"></script>
 
-<script src="static/js/alertify.min.js"></script>
+
 
 <script type="text/javascript">
-  $('.alertifly-button').on("click", function(e) {
+  $(document).on('submit','.form-wrap.form-button',function(e)
+                 {
+    console.log('hello');
     e.preventDefault();
-    var data = {};
-    var data;
-    for (var i=0;i < $('input').size();i++)
-    {
-       data [ $('input').get(i).name ] =  $('input').get(i).value ;
-    }
-    //if (data.email == "")  {alertify.error("not fill"); return false;}
-    $.ajax({
-        type:'POST',
-        data: data ,
-        success:function(result,a,b)
-        {
-          $('.alertifly-button').off()
-          $('.alertifly-button').click()
-          alertify.success("Success log message");
-        },
-        error: function (xhr, status, error) {
-          alertify.error(xhr.statusText);
-        }
-    })
-});
-
-</script>
-
-<script>
-  let faqLabel=document.querySelectorAll(".faq-label");
-
-  faqLabel.forEach(item=>item.onclick=()=>{
-     //selektuje Answer
-     item.nextElementSibling.classList.toggle('active');
-     
-     
-     let labelIcon=item.lastElementChild;
-     let icons=labelIcon.lastElementChild;
-     icons.classList.toggle('rotate');
    
-     
-  })
-  
+  });
 </script>
 <!-- coded by barber-->
 </body>
 </html>
-

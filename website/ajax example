@@ -1,0 +1,61 @@
+
+@auth.route('/login', methods=['GET','POST'])
+def login():
+    results = {'processed': 'false'}
+    if request.method == 'POST':
+        flash('Email does not exist!', category='error')
+        results = {'processed': 'true'}
+    return jsonify(results)
+
+    $("#ajax").on("click", function () {
+        reset();
+        alertify.confirm("Confirm?", function (e) {
+            if (e) {
+                alertify.alert("Successful AJAX after OK");
+            } else {
+                alertify.alert("Successful AJAX after Cancel");
+            }
+        });
+    });
+    
+$('input[type=submit]').on("click", function(e) {
+    e.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'/',
+        data:{
+        todo:$("#todo").val()
+        },
+        success:function(result)
+        {
+        alert('saved');
+        console.log(result);
+        }
+     })
+});
+
+
+$("button").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/pages/test/",
+        data: { 
+            id: $(this).val(), // < note use of 'this' here
+            access_token: $("#access_token").val() 
+        },
+        success: function(result) {
+            alert('ok');
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+
+
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+       
+{% endblock %}

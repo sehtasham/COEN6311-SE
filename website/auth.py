@@ -1,13 +1,14 @@
 from ast import Return
 from crypt import methods
 from ctypes import addressof
+from matplotlib import use
 
 from urllib3 import Retry
 from .validations import *
 from unicodedata import category
 from xmlrpc.client import boolean
-from flask import Blueprint, render_template,request, flash, redirect, url_for,Response
-from flask import json
+from flask import Blueprint, render_template,request, flash, redirect, url_for,Response,abort
+from flask import json,jsonify,session
 from . import db
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -20,17 +21,32 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
                 flash('logged in successfully', category='success')
                 login_user(user, remember=True)
+                session['user_name'] = user.first_name
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again', category='error')
+                return "", "500 Incorrect password"
         else:
-            flash('Email does not exist!', category='error')
-    return render_template("login2.html", user = current_user)
+            return "", "500 Email not found"
+    return render_template("login.html", user = current_user)
+
+
+@auth.route('/login2', methods=['GET','POST'])
+def login2():
+    results = {'processed': 'false'}
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if email :
+            #return "", "500 " + str(email) + str(password) + "reza"
+            flash('email is noy null', category='success')
+    return render_template("login.html", user = current_user)
+
+
 
 @auth.route('/logout')
 @login_required
@@ -58,15 +74,20 @@ def sign_up():
 
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('Username or Email is already  exist', category='error')
+            #flash('Username or Email is already  exist', category='error')
+            return "", "500 Username or Email is already  exist"
         elif not email_validation(email):
-            flash('Your email address is not valid!', category='error')
+            #flash('Your email address is not valid!', category='error')
+            return "", "500 Your email address is not valid!"
         elif not name_validation(first_name):
-            flash('Your name is incorrect', category='error')
+            #flash('Your name is incorrect', category='error')
+            return "", "500 Your name is incorrect"
         elif password != confirmed_password:
-            flash('Your passwords do not match!', category='error')
+            #flash('Your passwords do not match!', category='error')
+            return "", "500 Your passwords do not match!"
         elif not password_validation(password)[0]:
-            flash(password_validation(password)[1], category='error' )
+            #flash(password_validation(password)[1], category='error' )
+            return "", "500 " + str(password_validation(password)[1])
         else:
             new_user = User(email = email,
                             first_name=first_name,
@@ -84,7 +105,7 @@ def sign_up():
             flash('You successfully signed up and also logged in!', category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('views.home'))
-    return render_template("sign_up2.html", user = current_user)
+    return render_template("sign_up.html", user = current_user)
 
 
 # Reza
@@ -101,6 +122,29 @@ def contacts():
 def aboutus():
      return render_template("about-us.html")
 
+@auth.route('/flight_information', methods=['GET','POST'])
+def flight_information():
+     return render_template("flight_information.html")
+ 
+@auth.route('/user_cart', methods=['GET','POST'])
+def user_cart():
+     return render_template("user_cart.html")
+
+@auth.route('/payment', methods=['GET','POST'])
+def payment():
+     return render_template("payment.html")
+
+@auth.route('/modify_tickets', methods=['GET','POST'])
+def modify_tickets():
+     return render_template("modify_tickets.html")
+
+@auth.route('/profile', methods=['GET','POST'])
+def profile():
+     return render_template("profile.html")
+
+@auth.route('/faq', methods=['GET','POST'])
+def faq():
+     return render_template("faq.html")
 
 #ehtesham
 
@@ -127,5 +171,7 @@ def search_flight():
                                 'nAdults' : search_flight.adults,\
                                     'nChildren' : search_flight.children}\
                     )
-        flash('Not Found', category='error')
-    return render_template("search.html", user = current_user)
+        #flash('Not Found', category='error')
+        return "", "500 Not Found"
+    return render_template("search_result2.html", user = current_user)
+
