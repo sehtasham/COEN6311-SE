@@ -173,5 +173,5 @@ def search_flight():
                     )
         #flash('Not Found', category='error')
         return "", "500 Not Found"
-    return render_template("search_result2.html", user = current_user)
+    return render_template("search_result.html", user = current_user)
 

@@ -1,257 +1,184 @@
-{% for category, message in get_flashed_messages(with_categories=True) %}
-  <div class="alert alert-{{category}}">Message: {{ message }}</div>
-{% endfor %}
+{% extends 'base.html' %}
+{% block title %} Payment {% endblock %}
+{% block rd_navbar_nav_active %} <li class="active"><a id="Payment" href="/">Payment</a></li> {% endblock %}
 
-<!DOCTYPE html>
-<html class="wide wow-animation" lang="en">
-<head>
-  <!-- Site Title-->
-  <title>Home</title>
-  <meta name="format-detection" content="telephone=no">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta charset="utf-8">
-  <link rel="icon" href="static/images/logo-inverse-208x46.ico" type="image/x-icon">
-  <!-- Stylesheets -->
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald:200,400%7CLato:300,400,300italic,700%7CMontserrat:900">
-  <link rel="stylesheet" href="static/css/bootstrap.css">
-  <link rel="stylesheet" href="static/css/style.css">
-  <link rel="stylesheet" href="static/css/fonts.css">
-  <!--[if lt IE 10]>
-  <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-  <script src="js/html5shiv.min.js"> </script>
-  <![endif]-->
-</head>
-<body>
-
-  <style>
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-    
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-    
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
-    .alert-error {
-        padding: 12px;
-        border-radius: 3px;
-        font-size: 1.2rem;
-        margin-bottom: 16px;
-        border: 2px solid darkred;
-        background-color: red;
-        color: white;
-      }
-      .alert-success {
-         padding: 12px;
-         border-radius: 3px;
-         font-size: 1.2rem;
-         margin-bottom: 16px;
-         border: 2px solid darkred;
-         background-color: green;
-         color: white;
-       }
-      .alert-info {
-        padding: 12px;
-        border-radius: 3px;
-        font-size: 1.2rem;
-        margin-bottom: 16px;
-        border: 2px solid orange;
-        background-color: yellow;
-        color: black;
-      }
-</style>
-
-<!-- Page preloader-->
-<div class="page-loader">
-  <div class="page-loader-body">
-    <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue">
-        <div class="circle-clipper left">
-          <div class="circle"> </div>
-        </div>
-        <div class="gap-patch">
-          <div class="circle"> </div>
-        </div>
-        <div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-      <div class="spinner-layer spinner-red">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div>
-        <div class="gap-patch">
-          <div class="circle"> </div>
-        </div>
-        <div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-      <div class="spinner-layer spinner-yellow">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div>
-        <div class="gap-patch">
-          <div class="circle"></div>
-        </div>
-        <div class="circle-clipper right">
-          <div class="circle"> </div>
-        </div>
-      </div>
-      <div class="spinner-layer spinner-green">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div>
-        <div class="gap-patch">
-          <div class="circle"></div>
-        </div>
-        <div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Page-->
-<div class="page">
-  <!-- Page Header-->
-  <header class="section page-header">
-    <!-- RD Navbar-->
-    <div class="rd-navbar-wrap rd-navbar-corporate">
-      <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-device-layout="rd-navbar-static" data-md-stick-up-offset="130px" data-lg-stick-up-offset="100px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true">
-        <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
-        <div class="rd-navbar-top-panel rd-navbar-collapse novi-background">
-
-        </div>
-        <div class="rd-navbar-inner">
-          <!-- RD Navbar Panel-->
-          <div class="rd-navbar-panel">
-            <!-- RD Navbar Toggle-->
-            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-            <!-- RD Navbar Brand-->
-            <div class="rd-navbar-brand"><a class="brand-name" id="home" href="/"><img class="logo-default" src="static/images/logo-default-208x46.png" alt="" width="120" height="46"/><img class="logo-inverse" src="images/logo-inverse-208x46.png" alt="" width="120" height="46"/></a></div>
-          </div>
-          <div class="rd-navbar-aside-center">
-            <div class="rd-navbar-nav-wrap">
-              <!-- RD Navbar Nav-->
-              <ul class="rd-navbar-nav">
-                <li class="active"><a id="home" href="/">Home</a>
-                </li>
-                <li><a id="about-us" href="/aboutus">About Us</a>
-                </li>
-                <li><a id="contacts" href="/contacts">Contacts</a>
-                </li> 
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" id="login" href="/sign-up">Sign up</a></div>
-        </div>
-      </nav>
-    </div>
-  </header>
+{% block content %}
+<style>
+  body {
+   
+    padding: 8px;
+  }
   
-  <section class="section">
-    <div class="swiper-form-wrap">
-      <!-- Swiper-->
-      <div class="swiper-container swiper-slider swiper-slider_height-1 swiper-align-left swiper-align-left-custom context-dark bg-gray-darker" data-loop="false" data-autoplay="5500" data-simulate-touch="false" data-slide-effect="fade">
-        <div class="swiper-wrapper">
-         
-     
-          <div class="swiper-slide" data-slide-bg="static/images/swiper-slide-3.jpg">
-            <div class="swiper-slide-caption">
-              <div class="container container-bigger swiper-main-section" style="padding-bottom: 430px; padding-up: 430px ;">   
-                <div class="row row-fix justify-content-sm-center justify-content-md-start">
-                    <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
-                      <h3>Better, Faster, Cheaper</h3>
-                      <div class="divider divider-decorate"></div>
-                      <p class="text-spacing-sm"></p></div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Swiper controls-->
-       
-      </div>
-      <form method="POST">
-        <div class="container container-bigger form-request-wrap form-request-wrap-modern">
-          <div class="row row-fix justify-content-sm-center justify-content-lg-end">
-            <div class="col-lg-6 col-xxl-5">
-              <div class="form-request form-request-modern bg-gray-lighter novi-background">
-                <h4> Payment </h4>
-
-                <h6> I agree with blah blah blah blah </h4>
-                <!-- RD Mailform-->
-                <form class="rd-mailform form-fix">
-                  <div class="row row-20 row-fix">             
-                  </div>
+  * {
+    box-sizing: border-box;
+  }
+  
+  .row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin: -10px -15px;
+  }
+  
+  .col-25 {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+  }
+  
+  .col-50 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+  }
+  
+  .col-75 {
+    -ms-flex: 75%; /* IE10 */
+    flex: 75%;
+  }
+  
+  .col-25,
+  .col-50,
+  .col-75 {
+    padding: 0 16px;
+  }
+  
+  .container {
  
 
-                  <a class=" button button-sm button- button-nina" id="login" href="/user_cart">added to cart</a>
 
 
+  }
+  
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  label {
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+  }
+  
+  .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  a {
+    color: #2196F3;
+  }
+  
+  hr {
+    border: 1px solid lightgrey;
+  }
+  
+  span.price {
+    float: right;
+    color: grey;
+  }
+  
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+  @media (max-width: 800px) {
+    .row {
+      flex-direction: column-reverse;
+    }
+    .col-25 {
+      margin-bottom: 20px;
+    }
+  }
+
+</style>
+<div class="row row-fix justify-content-sm-center justify-content-lg-end">
+  <div class="col-lg-12 col-xxl-5">
+    <div class="form-request form-request-modern bg-gray-lighter novi-background">
+     
+
+      <div class="row">
+        <div class="col-75">
+          <div class="container">
+            <form action="/action_page.php">
+            
+              <div class="row">
+             
+      
+                <div class="col-50">
+                  <h3>Payment</h3>
+                  <label for="fname">Accepted Cards</label>
+                  <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                    <i class="fa fa-cc-discover" style="color:orange;"></i>
                   </div>
-                </form>
+                  <label for="cname">Name on Card</label>
+                  <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                  <label for="ccnum">Credit card number</label>
+                  <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                  <label for="expmonth">Exp Month</label>
+                  <input type="text" id="expmonth" name="expmonth" placeholder="September">
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear">Exp Year</label>
+                      <input type="text" id="expyear" name="expyear" placeholder="2018">
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv">CVV</label>
+                      <input type="text" id="cvv" name="cvv" placeholder="352">
+                    </div>
+                  </div>
+                </div>
+                
               </div>
-            </div>
+              <a type="submit"   id="payment" href="/user_cart">pay for it</a>
+              <input type="submit" value="Continue to checkout" class="btn" href="/user_cart">
+            </form>
           </div>
         </div>
-    </form>
-    </div>
-  </section>
-
-  <!-- our advantages-->
-
-  <!-- Tips & tricks-->
-
-
-
-  <!-- Footer Minimal-->
-  <footer class="section page-footer page-footer-minimal novi-background bg-cover text-center bg-gray-darker">
-    <div class="container container-wide">
-      <div class="row row-fix justify-content-sm-center align-items-md-center row-30">
-        <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left"><a id="home" href="/"><img class="inverse-logo" src="static/images/logo-inverse-208x46.png" alt="" width="150" height="46"/></a></div>
-        <div class="col-md-10 col-lg-7 col-xl-4">
-          <p class="right">&#169;&nbsp;<span class="copyright-year"></span> All Rights Reserved. Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a></p>
-        </div>
-        <div class="col-md-10 col-lg-7 col-xl-4 text-xl-right">
-          <ul class="group-xs group-middle">
-            <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-facebook" href="https://www.facebook.com/profile.php?id=100078067574552" target="_blank"></a></li>
-            <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-instagram" href="https://www.instagram.com/besticket.ir/?hl=en " target="_blank"></a></li>
-            <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-google" href="mailto:besticketir@gmail.com" target="_blank"></a></li>
-          </ul>
+        <div class="col-25">
+          <div class="container">
+            <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
+            <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+            <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+            <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+            <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+            <hr>
+            <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+          </div>
         </div>
       </div>
+
+
     </div>
-  </footer>
-</div>
-<!-- Global Mailform Output-->
-<div class="snackbars" id="form-output-global"> </div>
-<!-- Javascript-->
-<script src="static/js/core.min.js"></script>
-<script src="static/js/script.js"></script>
-<script src="static/vendor/jquery/jquery.min.js"></script>
-<script src="static/js/main.js"></script>
+  </div>
+ 
+  
+{% endblock %}
 
+{% block other_script %}
+  <script>
+      $('.website_copyright').get(0).innerHTML = 'W3 schools' 
+      $('.website_copyright').get(0).href = 'https://www.w3schools.com/howto/howto_css_checkout_form.asp' 
 
-
-<script type="text/javascript">
-  $(document).on('submit','.form-wrap.form-button',function(e)
-                 {
-    console.log('hello');
-    e.preventDefault();
-   
-  });
-</script>
-<!-- coded by barber-->
-</body>
-</html>
+    </script>
+{% endblock %}

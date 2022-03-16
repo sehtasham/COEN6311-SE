@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} Profile{% endblock %}
-{% block rd_navbar_nav_active %} <li class="active"><a id="home" href="/">My Profile</a></li> {% endblock %}
+{% block rd_navbar_nav_active %} <li class="active"><a id="profile" href="/">My Profile</a></li> {% endblock %}
 
 {% block content %}
 <div class="row row-fix justify-content-sm-center justify-content-lg-end">
@@ -10,7 +10,6 @@
       <!-- RD Mailform-->
       
         <div class="row row-20 row-fix">
-          
         
           <div class="col-lg-6">
               <label class="form-label-outside">Email</label>
@@ -70,12 +69,12 @@
 
           <div class="form-wrap form-button">
             <input type="submit" 
-            name="sign-up" 
-            id="sign-up" 
+            name="profile" 
+            id="profile" 
             class="button button-block button-secondary alertifly-button" 
-            value="Sign up"/>
+            value="Edit profile"/>
         </div>
-            <a id="register" href="/login" class="signup-image-link">Back to login</a>
+         
 
         </div>
       
