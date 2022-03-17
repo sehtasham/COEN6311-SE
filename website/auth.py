@@ -175,3 +175,21 @@ def search_flight():
         return "", "500 Not Found"
     return render_template("search_result.html", user = current_user)
 
+@auth.route('/home', methods=['GET'])
+def dropdown():
+    seat_type = ['Business', 'Economy', 'Permium']
+    return render_template('search.html', seat_type=seat_type, user = current_user)
+
+@auth.route('/search_post', methods=['GET','POST'])
+def search_post():
+    #if request.method == 'POST':
+    heading = ("Name","Price","Type","Note")
+    data = (("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
+            ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
+            ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
+            ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"),
+            ("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
+            ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
+            ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
+            ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"))
+    return render_template("search_result.html", heading=heading, data=data) 

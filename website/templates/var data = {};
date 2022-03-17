@@ -1,6 +1,0 @@
-var data = {};
-var data;
-for (var i=0;i < $('input').size();i++)
-{
-   data [ $('input').get(i).name ] =  $('input').get(i).value 
-}

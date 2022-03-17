@@ -30,6 +30,21 @@
                       </select>
                     </div>
                   </div>
+                  
+                  <div class="col-sm-12">
+                    <label class="form-label-outside">Seat_type</label>
+                    <div class="form-wrap form-wrap-inline">
+                      <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
+                        <option value="{{seat_type[0]}}" selected>{{seat_type[0]}}</option>
+                        {% for seat_type in seat_type[1:] %}
+                        <option value="{{seat_type}}">{{seat_type}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+
+                  
                   <div class="col-sm-12 col-lg-6">
                     <label class="form-label-outside">Depart Date</label>
                     <div class="form-wrap form-wrap-validation">
@@ -68,7 +83,7 @@
                   </div>
                 </div>
 
-                <div class="form-wrap form-button"><a class="button button-block button-secondary" id="search" href="/search">Search Flights</a></div>
+                <div class="form-wrap form-button"><a class="button button-block button-secondary" id="search" href="/search_post">Search Flights</a></div>
                 
               </form>
             </div>
