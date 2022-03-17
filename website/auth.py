@@ -21,8 +21,10 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        
         user = User.query.filter_by(email=email).first()
+        
+        if email == '' : return "", "500 Email is empty"
+        if password == '' : return "", "500 Password is empty"
         if user:
             if check_password_hash(user.password, password):
                 flash('logged in successfully', category='success')
@@ -34,19 +36,6 @@ def login():
         else:
             return "", "500 Email not found"
     return render_template("login.html", user = current_user)
-
-
-@auth.route('/login2', methods=['GET','POST'])
-def login2():
-    results = {'processed': 'false'}
-    email = request.form.get('email')
-    password = request.form.get('password')
-    if email :
-            #return "", "500 " + str(email) + str(password) + "reza"
-            flash('email is noy null', category='success')
-    return render_template("login.html", user = current_user)
-
-
 
 @auth.route('/logout')
 @login_required
