@@ -18,8 +18,10 @@
             {% for cell in row %}
             <td class="table__cell">{{ cell }}</td>
             {% endfor %}
-            <td> <button type="button" class="btn btn-primary">More Detail<i class="far fa-eye"></i></button></td>
-            <td> <button type="button" class="btn btn-success">Reserve<i class="far fa-eye"></i></button></td>
+            <td><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">More Detail<i class="far fa-eye"></i></button></td></a></th>
+
+            <td><a class="btn btn-success" id="login" href="/payment">Reserve<i class="far fa-eye"></i></button></td></a></th>
+
         </tr>
         {% endfor %}
     </table>
