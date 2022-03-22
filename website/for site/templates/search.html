@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+{% block title %}search{% endblock %}
+{% block faq_active %} class="active" {% endblock %}
+
+
+
+{% block content %}
+<form method="POST">
+    <h3 align="center">Find your tour</h3>
+    <div class="form-group">
+        <label for="source">From</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="source"
+        name="source"
+        placeholder="Enter Source Location"/>
+    </div>
+    <div class="form-group">
+        <label for="destination">To</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="destination"
+        name="destination"
+        placeholder="Enter Destination Location"/>
+    </div>
+    <div class="form-group">
+        <label for="departureDate">Departure Date</label>
+        <input 
+        type="date" 
+        class="form-control"
+        id="departureDate"
+        name="departureDate"
+        placeholder="Enter the date (yyyy-mm-dd)"/>
+    </div>
+    <div class="form-group">
+        <label for="arrivalDate">Arrival Date</label>
+        <input 
+        type="date" 
+        class="form-control"
+        id="arrivalDate"
+        name="arrivalDate"
+        placeholder="Enter the date (yyyy-mm-dd)"/>
+    </div>
+    
+    <br/>
+    <button type="search" class="btn btn-primary">Search</button>
+     
+</form>
+{% endblock %}
