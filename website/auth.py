@@ -1,6 +1,8 @@
 from ast import Return
 from crypt import methods
 from ctypes import addressof
+from signal import raise_signal
+from traceback import print_tb
 
 from urllib3 import Retry
 from .validations import *
@@ -88,7 +90,7 @@ def sign_up():
     return render_template("sign_up2.html", user = current_user)
 
 @auth.route('/', methods=['GET','POST'])
-def home():
+def home():   
      return render_template("home.html")
  
      
@@ -101,15 +103,9 @@ def aboutus():
      return render_template("about-us.html")  
      
 @auth.route('/user-account', methods=['GET','POST'])
+@login_required 
 def user_account():
-      
-    heading = ("Name","Family","Address","Phone")
-
-    data = (("Maryam","Ekhlasi","Montreal","4389909875"),
-    ("Maryam1","Ekhlasi1","Montreal1","4389909875"),
-    ("Maryam2","Ekhlasi2","Montreal2","4389909875"))
-
-    return render_template("user_account.html", heading=heading, data=data) 
+    return render_template("user_account.html",user = current_user)
 
 @auth.route('/search', methods=['GET'])
 def dropdown():
@@ -128,4 +124,36 @@ def search_post():
                 ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
                 ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
                 ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"))
-    return render_template("search_result.html", heading=heading, data=data) 
+    return render_template("search_result.html", heading=heading, data=data)
+
+@auth.route('/update', methods=['GET','POST'])
+def update():
+    return render_template("user_account.html",user = current_user)
+
+@auth.route('/edit', methods=['GET','POST'])
+def edit():
+    return render_template("user_update.html", user = current_user)  
+
+
+
+@auth.route('/edit-user', methods=['GET','POST'])
+def edit_user():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        first_name = request.form.get('firstName')
+        user = User.query.filter_by(email=current_user.email).first()
+        if user is None:
+            raise ValueError("error!!")
+        user.first_name= first_name
+        user.email = email
+        db.session.commit()
+        user = User.query.filter_by(email=email).first()
+        return render_template("user_account.html", user=user)
+    else:
+        return render_template("user_account.html", user=current_user)
+
+
+
+
+
+ 
