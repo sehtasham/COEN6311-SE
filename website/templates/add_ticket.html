@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+{% block title %}login{% endblock %}
+
+{% block content %}
+<form method="POST" action="/add-ticket-admin">
+    <h3 align="center">User Profile</h3>
+    <div class="form-group">
+        <label for="source_name">Source Name</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="source_name"
+        name="source_name"/>
+    </div>
+    <div class="form-group">
+        <label for="destination_name">Destination Name</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="destination_name"
+        name="destination_name"/>
+    </div>
+    <div class="form-group">
+        <label for="departure_date">Departure Date</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="departure_date"
+        name="departure_date"/>
+    </div>
+    <div class="form-group">
+        <label for="return_date">Return Date</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="return_date"
+        name="return_date"/>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="price"
+        name="price"/>
+    </div>
+    <div class="form-group">
+        <label for="airline">Airline</label>
+        <input 
+        type="text" 
+        class="form-control"
+        id="airline"
+        name="airline"/>
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-primary">Submit</button>
+     
+</form>
+{% endblock %}

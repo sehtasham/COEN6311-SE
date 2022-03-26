@@ -12,6 +12,7 @@ from flask import Blueprint, render_template,request, flash, redirect, url_for,R
 from flask import json
 from . import db
 from .models import User
+from .models import Tickett
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -152,8 +153,53 @@ def edit_user():
     else:
         return render_template("user_account.html", user=current_user)
 
+@auth.route('/admin', methods=['GET', 'POST'])
+def edit_ticket():
+    heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
+    data = Tickett.query.all()
+    data2 = (("Montreal","Ottawa","03/26/2022","04/01/2022","200 CAD", "Air Canada"),
+            ("Montreal","Toronto","12/26/2022","23/01/2022","150 CAD", "Air Canada"),
+            ("Montreal","Vancouver","05/26/2022","07/01/2022","300 CAD", "Air Canada"))
+    return render_template("admin.html", heading=heading, data=data)
 
+@auth.route('/add-ticket', methods=['GET','POST'])
+def add_ticket():
+    return render_template("add_ticket.html", user = current_user)  
 
+@auth.route('/add-ticket-admin', methods=['GET', 'POST'])
+def add_ticket_admin():
+    if request.method == 'POST':
+        source_name = request.form.get('source_name')
+        destination_name = request.form.get('destination_name')
+        departure_date = request.form.get('departure_date')
+        return_date = request.form.get('return_date')
+        price = request.form.get('price')
+        airline = request.form.get('airline')
 
+        if not name_validation(source_name):
+            flash('Source name is incorrect', category='error')
+        elif not name_validation(destination_name):
+            flash('Destination name is incorrect', category='error')
+        elif not name_validation(airline):
+            flash('Airline name is incorrect', category='error')
+        elif (price is None):
+            flash('Price field is empty', category='error')
+        elif (departure_date is None):
+            flash('Departure date field is empty', category='error')
+        elif (return_date is None):
+            flash('Return date date field is empty', category='error')
+        else:
+            new_ticket = Tickett(source_name = source_name, 
+            destination_name = destination_name, 
+            departure_date = departure_date, 
+            return_date = return_date,
+            price = price,
+            airline = airline)
 
+            db.session.add(new_ticket)
+            db.session.commit()
+            flash('You successfully add new ticket', category='success')
+            return redirect(url_for('auth.add_ticket'))
+
+        return render_template("add_ticket.html", user = current_user)
  

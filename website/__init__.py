@@ -32,7 +32,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(search, url_prefix='/')
 
-    from .models import User, Ticket, Note, Flight
+    from .models import User, Ticket, Note, Flight,Tickett
 
     create_database(app)
 
