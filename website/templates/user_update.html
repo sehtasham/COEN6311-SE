@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
-{% block title %} Sign Up {% endblock %}
-{% block rd_navbar_nav_active %} <li class="active"><a id="signup" href="/sign_up">Sign Up</a></li> {% endblock %}
+{% block title %} Profile{% endblock %}
+{% block rd_navbar_nav_active %} <li class="active"><a id="profile" href="/user_update">EDit Profile</a></li> {% endblock %}
 
 {% block content %}
 <div class="row row-fix justify-content-sm-center justify-content-lg-end">
   <div class="col-lg-6 col-xxl-5">
     <div class="form-request form-request-modern bg-gray-lighter novi-background">
-      <h4>Sign up</h4>
+      <h4>Edit your profile</h4>
       <!-- RD Mailform-->
       
         <div class="row row-20 row-fix">
-          
         
           <div class="col-lg-6">
               <label class="form-label-outside">Email</label>
               <div class="form-wrap form-wrap-inline">
-                <input class="form-input select-filter" name="email" id="email" type="email" data-placeholder="All" data-minimum-results-for-search="Infinity">
+                <input class="form-input select-filter" type="email" name="email" id="email" 
+                value="{{current_user.email}}"
+                type="email" data-placeholder="All" data-minimum-results-for-search="Infinity">
               </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-label-outside">First Name</label>
+              <label class="form-label-outside">Full Name</label>
               <div class="form-wrap form-wrap-iPline">
-              <input class="form-input select-filter" name="firstName" id="firstName" data-placeholder="All" data-minimum-results-for-search="Infinity" min="2" max="3">
+              <input class="form-input select-filter" 
+              value="{{current_user.first_name}}"
+              name="firstName" id="firstName" data-placeholder="All" data-minimum-results-for-search="Infinity" min="2" max="3">
               </div>
           </div>
      
@@ -42,13 +45,13 @@
            <div class="col-lg-6">
               <label class="form-label-outside">Phone number</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="phone" id="phone" type="number">
+                <input class="form-input value="{{current_user.phone}}" input-append" name="phone" id="phone" type="number">
               </div>
             </div>
             <div class="col-lg-6">
               <label class="form-label-outside">zipcode</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="zipcode" id="zipcode" type="text">
+                <input class="form-input input-append"   value="{{current_user.postal}}" name="zipcode" id="zipcode" type="text">
            </div>   
           </div>
 
@@ -56,35 +59,31 @@
           <div class="col-lg-6">
               <label class="form-label-outside">city</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="city" id="city" type="text" min="0" max="300">
+                <input class="form-input input-append" value="{{current_user.city}}"  name="city" id="city" type="text" min="0" max="300">
               </div>
             </div>
             <div class="col-lg-6">
               <label class="form-label-outside">country</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="country" id="country" type="text" min="0" max="300">
+                <input class="form-input input-append" value="{{current_user.country}}" name="country" id="country" type="text" min="0" max="300">
            </div>   
           </div>
       </div>
 
 
+          
+        <div class="form-wrap form-button">
+          <input type="submit" 
+          name="login" 
+          id="login2" 
+          class="button button-block button-secondary alertifly-button" 
+          value="Edit profile"/>
+      </div>
 
-      <div class="form-wrap form-button">
-        <input type="submit" 
-        name="sign-up" 
-        id="sign-up" 
-        class="button button-block button-secondary alertifly-button" 
-        value="Sign up"/>
-    </div>
 
- 
-       
-         
-            <a id="register" href="/login" class="signup-image-link" style="font-size: larger;margin-top: 15px;">Back to login</a>
+
+
         </div>
-
-
-        
       
     </div>
   </div>

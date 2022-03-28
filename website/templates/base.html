@@ -186,11 +186,11 @@
         {% if session['_user_id'] %}
 
         <li class=  "rd-navbar-aside-right dropdown">
-          <a href="#" class="dropdown-toggle button button-sm button-secondary button-nina" data-toggle="dropdown" role="button" aria-expanded="false">  {{session['user_name']}}<span class="caret"></span></a>       
+          <a href="#" class="dropdown-toggle button button-sm button-secondary button-nina" data-toggle="dropdown" role="button" aria-expanded="false">  {{current_user.first_name}}<span class="caret"></span></a>       
            <ul class="dropdown-menu">
-             <li class= "dropdown-header" style="text-align: -webkit-center;">Dashboard</li>
-             <li style="text-align: -webkit-center;"><a href="/logout" > Log out </a></li>
-             <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/profile" > Edit profile</a></li>                         
+             <li style="text-align: -webkit-center;"><a href="/user-account" >User account </a></li>
+             <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/edit-user" > Edit profile</a></li>
+             <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/logout" > Log out </a></li>                         
            </ul>
        
           {% else %}
@@ -225,7 +225,7 @@
         <!-- Swiper controls-->
        
       </div>
-      <form method="POST">
+      <form method="POST"  {% block action_type %} {% endblock %} >
         <div class="container container-bigger form-request-wrap form-request-wrap-modern"> 
            
                 {% block content %} {% endblock %} 
@@ -296,17 +296,15 @@
        data [ $('input').get(i).id ] =  $('input').get(i).value ;
     }
 
-    
-
-    //if (data.email == "")  {alertify.error("not fill"); return false;}
     $.ajax({
         type:'POST',
         data: data ,
         success:function(result,a,b)
         {
+          //document.write(response);
           $('.alertifly-button').off()
           $('.alertifly-button').click()
-          alertify.success("Success log message");
+          alertify.success("Success log message!!!!!!!!!!!!!");
         },
         error: function (xhr, status, error) {
           alertify.error(xhr.statusText);
@@ -315,6 +313,17 @@
 });
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
   let faqLabel=document.querySelectorAll(".faq-label");

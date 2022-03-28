@@ -1,4 +1,4 @@
-from ast import Not, Return
+from ast import Return
 from crypt import methods
 from ctypes import addressof
 from matplotlib import use
@@ -23,13 +23,13 @@ def login():
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
         
-        print ("recza")
         if email == '' : return "", "500 Email is empty"
         if password == '' : return "", "500 Password is empty"
         if user:
             if check_password_hash(user.password, password):
                 flash('logged in successfully', category='success')
                 login_user(user, remember=True)
+                session['user_name'] = user.first_name
                 return redirect(url_for('views.home'))
             else:
                 return "", "500 Incorrect password"
@@ -51,7 +51,7 @@ def sign_up():
         first_name = request.form.get('firstName')
         password = request.form.get('password')
         confirmed_password = request.form.get('confirmedPassword')
-        gender = request.form.get('gender')
+        gender = request.form.get('confirmedPassword')
 
         phone = request.form.get('phone')
         birthday = request.form.get('birthday')
@@ -91,12 +91,9 @@ def sign_up():
                             )
             db.session.add(new_user)
             db.session.commit()
-
             flash('You successfully signed up and also logged in!', category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('views.home'))
-        #return render_template("home.html", user=user)
-
     return render_template("sign_up.html", user = current_user)
 
 
@@ -209,7 +206,7 @@ def edit_user():
         first_name = request.form.get('firstName')
         password = request.form.get('password')
         confirmed_password = request.form.get('confirmedPassword')
-        gender = request.form.get('gender')
+        gender = request.form.get('confirmedPassword')
 
         phone = request.form.get('phone')
         birthday = request.form.get('birthday')
@@ -218,8 +215,6 @@ def edit_user():
         country = request.form.get('country')
         postal = request.form.get('postal')
         
-
-        print("1")
         user = User.query.filter_by(email=current_user.email).first()
         if user is None:
             return "", "500 Username or Email is already  exist"
@@ -232,12 +227,10 @@ def edit_user():
         elif password != confirmed_password:
             #flash('Your passwords do not match!', category='error')
             return "", "500 Your passwords do not match!"
-        elif password != "" and not password_validation(password)[0]:
+        elif not password_validation(password)[0]:
             #flash(password_validation(password)[1], category='error' )
             return "", "500 " + str(password_validation(password)[1])
-       
         else:
-            print("reza2")
             user.first_name= first_name
             user.email = email
             user.password = generate_password_hash(password, method='sha256')
@@ -249,15 +242,15 @@ def edit_user():
             user.country = country
             user.postalcode = postal    
             
+
             db.session.commit()
 
             db.session.commit()
             user = User.query.filter_by(email=email).first()
             flash('Your profile is updated!', category='success')
-            print("reza6")
             return render_template("user_account.html", user=user)
     else:
-        return render_template("user_update.html", user=current_user)
+        return render_template("user_account.html", user=current_user)
 
 @auth.route('/admin', methods=['GET', 'POST'])
 def edit_ticket():
