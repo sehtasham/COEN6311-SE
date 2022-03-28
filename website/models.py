@@ -38,3 +38,12 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     flight_id = db.Column(db.Integer, db.ForeignKey('flight.id'))
+
+class Tickett(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    source_name = db.Column(db.String(10000))
+    destination_name = db.Column(db.String(10000))
+    departure_date = db.Column(db.String(10000))
+    return_date = db.Column(db.String(200),  nullable=False)
+    price = db.Column(db.String(200),  nullable=False)
+    airline = db.Column(db.String(10000))

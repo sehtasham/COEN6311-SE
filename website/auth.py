@@ -1,16 +1,18 @@
-from ast import Not, Return
+from ast import Return
 from crypt import methods
 from ctypes import addressof
-from matplotlib import use
+from signal import raise_signal
+from traceback import print_tb
 
 from urllib3 import Retry
 from .validations import *
 from unicodedata import category
 from xmlrpc.client import boolean
-from flask import Blueprint, render_template,request, flash, redirect, url_for,Response,abort
-from flask import json,jsonify,session
+from flask import Blueprint, render_template,request, flash, redirect, url_for,Response
+from flask import json
 from . import db
 from .models import User
+from .models import Tickett
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -218,8 +220,6 @@ def edit_user():
         country = request.form.get('country')
         postal = request.form.get('postal')
         
-
-        print("1")
         user = User.query.filter_by(email=current_user.email).first()
         if user is None:
             return "", "500 Username or Email is already  exist"
@@ -237,7 +237,6 @@ def edit_user():
             return "", "500 " + str(password_validation(password)[1])
        
         else:
-            print("reza2")
             user.first_name= first_name
             user.email = email
             user.password = generate_password_hash(password, method='sha256')
@@ -268,12 +267,8 @@ def edit_ticket():
             ("Montreal","Vancouver","05/26/2022","07/01/2022","300 CAD", "Air Canada"))
     return render_template("admin.html", heading=heading, data=data)
 
-@auth.route('/add-ticket', methods=['GET','POST'])
+@auth.route('/add-ticket', methods=['GET', 'POST'])
 def add_ticket():
-    return render_template("add_ticket.html", user = current_user)  
-
-@auth.route('/add-ticket-admin', methods=['GET', 'POST'])
-def add_ticket_admin():
     if request.method == 'POST':
         source_name = request.form.get('source_name')
         destination_name = request.form.get('destination_name')
@@ -281,20 +276,27 @@ def add_ticket_admin():
         return_date = request.form.get('return_date')
         price = request.form.get('price')
         airline = request.form.get('airline')
-
+        print("check1")
         if not name_validation(source_name):
-            flash('Source name is incorrect', category='error')
+            #flash('Source name is incorrect', category='error')
+            return "", "500 Source name is incorrect"
         elif not name_validation(destination_name):
-            flash('Destination name is incorrect', category='error')
+            #flash('Destination name is incorrect', category='error')
+            return "", "500 Destination name is incorrect"
         elif not name_validation(airline):
-            flash('Airline name is incorrect', category='error')
+            #flash('Airline name is incorrect', category='error')
+            return "", "500 Airline name is incorrect"
         elif (price is None):
-            flash('Price field is empty', category='error')
+            #flash('Price field is empty', category='error')
+            return "", "500 Price field is empty"
         elif (departure_date is None):
-            flash('Departure date field is empty', category='error')
+            #flash('Departure date field is empty', category='error')
+            return "", "500 Departure date field is empty"
         elif (return_date is None):
-            flash('Return date date field is empty', category='error')
+            #flash('Return date date field is empty', category='error')
+            return "", "500 Return date date field is empty"
         else:
+            print("check4")
             new_ticket = Tickett(source_name = source_name, 
             destination_name = destination_name, 
             departure_date = departure_date, 
@@ -306,5 +308,5 @@ def add_ticket_admin():
             db.session.commit()
             flash('You successfully add new ticket', category='success')
             return redirect(url_for('auth.add_ticket'))
-
+    else :
         return render_template("add_ticket.html", user = current_user)

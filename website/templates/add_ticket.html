@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %} Add Ticket {% endblock %}
+{% block rd_navbar_nav_active %} <li class="active"><a id="add_tciket" href="/add-ticket">Add Ticket</a></li> {% endblock %}
+
+
+{% block content %}
+
+<div class="row row-fix justify-content-sm-center justify-content-lg-end">
+  <div class="col-lg-6 col-xxl-5">
+    <div class="form-request form-request-modern bg-gray-lighter novi-background">
+     
+      <!-- RD Mailform-->
+      <form class="rd-mailform form-fix">
+        <div class="row row-20 row-fix">
+        
+              <div class="col-sm-12">
+                <div class="form-wrap form-wrap-validation">
+                  <label class="form-label-outside">Source Name</label>
+                  <div class="form-wrap form-wrap-inline">
+                    <input class="form-input " name="source_name" id="source_name" type="text" data-placeholder="All" data-minimum-results-for-search="Infinity">
+    
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+              <div class="form-wrap form-wrap-validation">
+                <label class="form-label-outside">Destination_name</label>
+                <div class="form-wrap form-wrap-inline">
+                  <input class="form-input" name="destination_name" id="destination_name" type="text" data-placeholder="All" data-minimum-results-for-search="Infinity">
+  
+                </div>
+              </div>
+          </div>
+
+
+                  
+            <div class="col-sm-12 col-lg-6">
+              <label class="form-label-outside">Depart Date</label>
+              <div class="form-wrap form-wrap-validation">
+                <!-- Select -->
+                <input class="form-input" id="departure_date" name="departure_date" type="text" data-time-picker="date">
+                <label class="form-label" for="departure_date">Choose the date</label>
+                <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
+                <!--  option(value="1") Choose the date-->
+                <!--  option(value="2") Primary-->
+                <!--  option(value="3") Middle-->
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-lg-6">
+              <label class="form-label-outside">Return Date</label>
+              <div class="form-wrap form-wrap-validation">
+                <!-- Select -->
+                <input class="form-input" id="return_date" name="return_date" type="text" data-time-picker="date">
+                <label class="form-label" for="return_date">Choose the date</label>
+                <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
+                <!--  option(value="1") Choose the date-->
+                <!--  option(value="2") Primary-->
+                <!--  option(value="3") Middle-->
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-wrap form-wrap-validation">
+                <label class="form-label-outside">Price</label>
+                <div class="form-wrap form-wrap-inline ">
+                  <input class="form-input currency" name="price" id="price" type="number" data-placeholder="All" data-minimum-results-for-search="Infinity">
+                </div>
+              </div>
+          </div>
+
+
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-wrap form-wrap-validation">
+              <label class="form-label-outside">Airline</label>
+              <div class="form-wrap form-wrap-inline">
+                <input class="form-input" name="airline" id="airline" type="text" data-placeholder="All" data-minimum-results-for-search="Infinity">
+
+              </div>
+            </div>
+        </div>
+
+        <div class="form-wrap form-button">
+          <input type="submit" 
+          name="login" 
+          id="login2" 
+          class="button button-block button-secondary alertifly-button" 
+          value="Add Ticket"/>
+      </div>
+
+
+
+              </form>
+            </div>
+          </div>
+       </div>
+     
+{% endblock %}
