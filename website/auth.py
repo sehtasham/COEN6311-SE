@@ -92,7 +92,7 @@ def sign_up():
             print ("check point 13") 
             new_user = User(email = email,
                             first_name=first_name,
-                            password=generate_password_hash(password, method='sha256'),
+                            password=generate_password_hash(password, method='sha256')
                             #gender=gender,
                             #phonenumber=phone,
                             #birthday=birthday,
@@ -236,7 +236,6 @@ def edit_user():
         
         is_alertifly = request.form.get('is_alertifly')
         
-        print(is_alertifly , " is alet")
         user = User.query.filter_by(email=current_user.email).first()
         if user is None:
             return "", "500 Username or Email is already  exist"
@@ -271,7 +270,6 @@ def edit_user():
             db.session.commit()
             user = User.query.filter_by(email=email).first()
             flash('Your profile is updated!', category='success')
-            print ("check point 2")
 
             return render_template("user_account.html", user=user)
     else:
