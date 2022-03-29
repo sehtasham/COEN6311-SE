@@ -222,8 +222,11 @@
              <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/edit-user" > Edit profile</a></li>
     
              <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/logout" > Log out </a></li>
+             {% if current_user.admin %}
              <hr style="margin-top:10px">
              <li style="text-align: -webkit-center; margin-top: 1px;"><a href="/admin" > Admin </a></li> 
+
+             {% endif %}
            </ul>
        
           {% else %}

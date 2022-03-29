@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(200),  nullable=False)
     first_name = db.Column(db.String(200),  nullable=False)
-    #admin = db.Column(db.Boolean, nullable=True, default=False)
+    admin = db.Column(db.Boolean, nullable=False, default=False)
     tiket = db.relationship('Ticket')
 
 

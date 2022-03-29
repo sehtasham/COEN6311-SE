@@ -1,6 +1,7 @@
 from ast import Return
 from crypt import methods
 from ctypes import addressof
+from pickle import FALSE
 from signal import raise_signal
 from traceback import print_tb
 
@@ -92,7 +93,8 @@ def sign_up():
             print ("check point 13") 
             new_user = User(email = email,
                             first_name=first_name,
-                            password=generate_password_hash(password, method='sha256')
+                            password=generate_password_hash(password, method='sha256'),
+                            admin=False,
                             #gender=gender,
                             #phonenumber=phone,
                             #birthday=birthday,
@@ -239,6 +241,8 @@ def edit_user():
         user = User.query.filter_by(email=current_user.email).first()
         if user is None:
             return "", "500 Username or Email is already  exist"
+        if current_user.admin == True:
+            return "", "500 You are Admin! your data can not change!!!"
         elif not email_validation(email):
             #flash('Your email address is not valid!', category='error')
             return "", "500 Your email address is not valid!"
