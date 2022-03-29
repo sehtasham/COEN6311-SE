@@ -329,6 +329,8 @@
        data [ $('input').get(i).id ] =  $('input').get(i).value ;
     }
 
+    data["is_alertifly"]  = 1;
+
     $.ajax({
         type:'POST',
         data: data ,

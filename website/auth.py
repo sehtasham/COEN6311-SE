@@ -25,11 +25,14 @@ def login():
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
         
-        print ("recza")
+        is_alertifly = request.form.get('is_alertifly')
+
         if email == '' : return "", "500 Email is empty"
         if password == '' : return "", "500 Password is empty"
         if user:
             if check_password_hash(user.password, password):
+                if is_alertifly == '1' : 
+                    return render_template("login.html", user=user) 
                 flash('logged in successfully', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
@@ -49,6 +52,7 @@ def logout():
 @auth.route('/sign-up', methods=['GET','POST'])
 def sign_up():
     if request.method == 'POST':
+        print ("check point 1")
         email = request.form.get('email')
         first_name = request.form.get('firstName')
         password = request.form.get('password')
@@ -62,8 +66,11 @@ def sign_up():
         country = request.form.get('country')
         postal = request.form.get('postal')
         #userType = request.form.get('admin')
+        
+        is_alertifly = request.form.get('is_alertifly')
 
         user = User.query.filter_by(email=email).first()
+        print ("check point 11")
         if user:
             #flash('Username or Email is already  exist', category='error')
             return "", "500 Username or Email is already  exist"
@@ -79,7 +86,10 @@ def sign_up():
         elif not password_validation(password)[0]:
             #flash(password_validation(password)[1], category='error' )
             return "", "500 " + str(password_validation(password)[1])
+        elif is_alertifly == '1' : 
+           return render_template("sign_up.html", user=user) 
         else:
+            print ("check point 13") 
             new_user = User(email = email,
                             first_name=first_name,
                             password=generate_password_hash(password, method='sha256'),
@@ -93,13 +103,16 @@ def sign_up():
                             )
             db.session.add(new_user)
             db.session.commit()
-
+            print ("check point 15")
             flash('You successfully signed up and also logged in!', category='success')
             login_user(new_user, remember=True)
+            print ("check point 2")
+
             return redirect(url_for('views.home'))
         #return render_template("home.html", user=user)
-
-    return render_template("sign_up.html", user = current_user)
+    else:
+        print ("check point 3")
+        return render_template("sign_up.html", user = current_user)
 
 
 # Reza
@@ -207,6 +220,7 @@ def edit():
 @auth.route('/edit-user', methods=['GET','POST'])
 def edit_user():
     if request.method == 'POST':
+        print ("check point 1")
         email = request.form.get('email')
         first_name = request.form.get('firstName')
         password = request.form.get('password')
@@ -220,6 +234,9 @@ def edit_user():
         country = request.form.get('country')
         postal = request.form.get('postal')
         
+        is_alertifly = request.form.get('is_alertifly')
+        
+        print(is_alertifly , " is alet")
         user = User.query.filter_by(email=current_user.email).first()
         if user is None:
             return "", "500 Username or Email is already  exist"
@@ -235,7 +252,8 @@ def edit_user():
         elif password != "" and not password_validation(password)[0]:
             #flash(password_validation(password)[1], category='error' )
             return "", "500 " + str(password_validation(password)[1])
-       
+        elif is_alertifly == '1' : 
+           return render_template("user_update.html", user=user)
         else:
             user.first_name= first_name
             user.email = email
@@ -253,9 +271,11 @@ def edit_user():
             db.session.commit()
             user = User.query.filter_by(email=email).first()
             flash('Your profile is updated!', category='success')
-            print("reza6")
+            print ("check point 2")
+
             return render_template("user_account.html", user=user)
     else:
+        print ("check point 3")
         return render_template("user_update.html", user=current_user)
 
 @auth.route('/admin', methods=['GET', 'POST'])
@@ -276,7 +296,8 @@ def add_ticket():
         return_date = request.form.get('return_date')
         price = request.form.get('price')
         airline = request.form.get('airline')
-        print("check1")
+        is_alertifly = request.form.get('is_alertifly')
+
         if not name_validation(source_name):
             #flash('Source name is incorrect', category='error')
             return "", "500 Source name is incorrect"
@@ -295,8 +316,9 @@ def add_ticket():
         elif (return_date is None):
             #flash('Return date date field is empty', category='error')
             return "", "500 Return date date field is empty"
+        elif is_alertifly == '1' : 
+           return render_template("add_ticket.html", user=user)
         else:
-            print("check4")
             new_ticket = Tickett(source_name = source_name, 
             destination_name = destination_name, 
             departure_date = departure_date, 
