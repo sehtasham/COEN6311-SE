@@ -87,7 +87,7 @@ def sign_up():
             #flash(password_validation(password)[1], category='error' )
             return "", "500 " + str(password_validation(password)[1])
         elif is_alertifly == '1' : 
-           return render_template("sign_up.html", user=user) 
+           return render_template("sign_up.html", user=current_user) 
         else:
             print ("check point 13") 
             new_user = User(email = email,
@@ -253,7 +253,7 @@ def edit_user():
             #flash(password_validation(password)[1], category='error' )
             return "", "500 " + str(password_validation(password)[1])
         elif is_alertifly == '1' : 
-           return render_template("user_update.html", user=user)
+           return render_template("user_update.html", user=current_user)
         else:
             user.first_name= first_name
             user.email = email
@@ -317,7 +317,7 @@ def add_ticket():
             #flash('Return date date field is empty', category='error')
             return "", "500 Return date date field is empty"
         elif is_alertifly == '1' : 
-           return render_template("add_ticket.html", user=user)
+           return render_template("add_ticket.html", user=current_user)
         else:
             new_ticket = Tickett(source_name = source_name, 
             destination_name = destination_name, 
@@ -329,6 +329,6 @@ def add_ticket():
             db.session.add(new_ticket)
             db.session.commit()
             flash('You successfully add new ticket', category='success')
-            return redirect(url_for('auth.add_ticket'))
+            return redirect(url_for('auth.edit_ticket'))
     else :
         return render_template("add_ticket.html", user = current_user)
