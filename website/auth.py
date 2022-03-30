@@ -141,7 +141,33 @@ def user_cart():
 
 @auth.route('/payment', methods=['GET','POST'])
 def payment():
-     return render_template("payment.html")
+    if request.method == 'POST':
+        cname = request.form.get('cardname')
+        cardnumber = request.form.get('cardnumber')
+        expmonth = request.form.get('expmonth')
+        expyear = request.form.get('expyear')
+        cvv = request.form.get('cvv')
+        
+        is_alertifly = request.form.get('is_alertifly')
+
+        if cname == "" :
+            return "", "500 card name is empty"
+        elif cardnumber == "" :
+            return "", "500 card number is empty"
+        elif expmonth == "" :
+            return "", "500 card expired month is empty"
+        elif expyear == "" :
+            return "", "500 card expired year is empty"
+        elif cvv == "" :
+            return "", "500 cvv is empty"
+        
+        elif is_alertifly == '1' : 
+           return render_template("payment.html", user=current_user)
+        else :
+            flash('You successfully buy the Ticket and it has been added to your profile', category='success')
+            return redirect(url_for('auth.user_cart'))
+   
+    return render_template("payment.html")
 
 @auth.route('/modify_tickets', methods=['GET','POST'])
 def modify_tickets():
@@ -192,6 +218,10 @@ def dropdown():
 @auth.route('/search_post', methods=['GET','POST'])
 def search_post():
     #if request.method == 'POST':
+    heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
+    data = Tickett.query.all()
+    return render_template("search_result.html", heading=heading, data=data)
+
     heading = ("Name","Price","Type","Note")
     data = (("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
             ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
@@ -282,6 +312,8 @@ def edit_user():
 
 @auth.route('/admin', methods=['GET', 'POST'])
 def edit_ticket():
+    if not current_user.admin :
+        return "", "500 access denied!"
     heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
     data = Tickett.query.all()
     data2 = (("Montreal","Ottawa","03/26/2022","04/01/2022","200 CAD", "Air Canada"),
@@ -291,6 +323,8 @@ def edit_ticket():
 
 @auth.route('/add-ticket', methods=['GET', 'POST'])
 def add_ticket():
+    if not current_user.admin :
+        return "", "500 access denied!"
     if request.method == 'POST':
         source_name = request.form.get('source_name')
         destination_name = request.form.get('destination_name')
@@ -306,9 +340,9 @@ def add_ticket():
         elif not name_validation(destination_name):
             #flash('Destination name is incorrect', category='error')
             return "", "500 Destination name is incorrect"
-        elif not name_validation(airline):
+        #elif not name_validation(airline):
             #flash('Airline name is incorrect', category='error')
-            return "", "500 Airline name is incorrect"
+            #return "", "500 Airline name is incorrect"
         elif (price is None):
             #flash('Price field is empty', category='error')
             return "", "500 Price field is empty"

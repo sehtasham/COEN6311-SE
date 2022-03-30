@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} Payment {% endblock %}
-{% block rd_navbar_nav_active %} <li class="active"><a id="Payment" href="/">Payment</a></li> {% endblock %}
+{% block rd_navbar_nav_active %} <li class="active"><a id="Payment" href="/payment">Payment</a></li> {% endblock %}
 
 {% block content %}
 <style>
@@ -42,10 +42,9 @@
     padding: 0 16px;
   }
   
-  .container {
+  .container.cart {
  
-
-
+     display: none;
 
   }
   
@@ -150,13 +149,12 @@
                 </div>
                 
               </div>
-              <a type="submit"   id="payment" href="/user_cart">pay for it</a>
-              <input type="submit" value="Continue to checkout" class="btn" href="/user_cart">
+              <input type="submit" value="Continue to checkout" class="btn alertifly-button">
             </form>
           </div>
         </div>
         <div class="col-25">
-          <div class="container">
+          <div class="container cart">
             <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
             <p><a href="#">Product 1</a> <span class="price">$15</span></p>
             <p><a href="#">Product 2</a> <span class="price">$5</span></p>
