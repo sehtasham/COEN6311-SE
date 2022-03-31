@@ -41,7 +41,7 @@
 
   <style>
     .form-request.form-request-modern.bg-gray-lighter.novi-background{
-      max-height: 700px !important;
+      max-height: 750px !important;
       overflow: scroll !important;;
     }
    
@@ -344,10 +344,11 @@
           //document.write(response);
           $('.alertifly-button').off()
           $('.alertifly-button').click()
-          alertify.success("Success log message!!!!!!!!!!!!!");
+          alertify.success("Success log message")
         },
         error: function (xhr, status, error) {
           alertify.error(xhr.statusText);
+
         }
     })
 });

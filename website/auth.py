@@ -2,15 +2,13 @@ from ast import Return
 from crypt import methods
 from ctypes import addressof
 from pickle import FALSE
-from signal import raise_signal
 from traceback import print_tb
 
-from urllib3 import Retry
+
 from .validations import *
 from unicodedata import category
 from xmlrpc.client import boolean
 from flask import Blueprint, render_template,request, flash, redirect, url_for,Response
-from flask import json
 from . import db
 from .models import User
 from .models import Tickett
@@ -65,7 +63,7 @@ def sign_up():
         adress = request.form.get('adress')
         city = request.form.get('city')
         country = request.form.get('country')
-        postal = request.form.get('postal')
+        postal = request.form.get('zipcode')
         #userType = request.form.get('admin')
         
         is_alertifly = request.form.get('is_alertifly')
@@ -74,12 +72,15 @@ def sign_up():
         print ("check point 11")
         if user:
             #flash('Username or Email is already  exist', category='error')
+            print ("check point 21")
+
             return "", "500 Username or Email is already  exist"
         elif not email_validation(email):
             #flash('Your email address is not valid!', category='error')
             return "", "500 Your email address is not valid!"
         elif not name_validation(first_name):
             #flash('Your name is incorrect', category='error')
+            print ("check point 21")
             return "", "500 Your name is incorrect"
         elif password != confirmed_password:
             #flash('Your passwords do not match!', category='error')
@@ -90,18 +91,18 @@ def sign_up():
         elif is_alertifly == '1' : 
            return render_template("sign_up.html", user=current_user) 
         else:
-            print ("check point 13") 
+            print ("check point 22")
             new_user = User(email = email,
                             first_name=first_name,
                             password=generate_password_hash(password, method='sha256'),
                             admin=False,
                             #gender=gender,
-                            #phonenumber=phone,
+                            phonenumber=phone,
                             #birthday=birthday,
                             #address= adress,
-                            #city=city,
-                            #country=country,
-                            #postalcode=postal
+                            city=city,
+                            country=country,
+                            postalcode=postal
                             )
             db.session.add(new_user)
             db.session.commit()
@@ -113,8 +114,71 @@ def sign_up():
             return redirect(url_for('views.home'))
         #return render_template("home.html", user=user)
     else:
-        print ("check point 3")
+        print ("check point 31")
         return render_template("sign_up.html", user = current_user)
+
+
+
+@auth.route('/edit-user', methods=['GET','POST'])
+def edit_user():
+    if request.method == 'POST':
+        print ("check point 1")
+        email = request.form.get('email')
+        first_name = request.form.get('firstName')
+        password = request.form.get('password')
+        confirmed_password = request.form.get('confirmedPassword')
+        gender = request.form.get('gender')
+
+        phone = request.form.get('phone')
+        #birthday = request.form.get('birthday')
+        #adress = request.form.get('adress')
+        city = request.form.get('city')
+        country = request.form.get('country')
+        postal = request.form.get('zipcode')
+        
+        is_alertifly = request.form.get('is_alertifly')
+        
+        user = User.query.filter_by(email=current_user.email).first()
+        if user is None:
+            return "", "500 Username or Email is already  exist"
+        if current_user.admin == True:
+            return "", "500 You are Admin! your data can not change!!!"
+        elif not email_validation(email):
+            #flash('Your email address is not valid!', category='error')
+            return "", "500 Your email address is not valid!"
+        elif not name_validation(first_name):
+            #flash('Your name is incorrect', category='error')
+            return "", "500 Your name is incorrect"
+        elif password != confirmed_password:
+            #flash('Your passwords do not match!', category='error')
+            return "", "500 Your passwords do not match!"
+        elif password != "" and not password_validation(password)[0]:
+            #flash(password_validation(password)[1], category='error' )
+            return "", "500 " + str(password_validation(password)[1])
+        elif is_alertifly == '1' : 
+           return render_template("user_update.html", user=current_user)
+        else:
+            user.first_name= first_name
+            user.email = email
+            user.password = generate_password_hash(password, method='sha256')
+            #user.gender = gender
+            user.phonenumber = phone
+            #user.birthday = birthday
+            #user.address = adress
+            user.city = city
+            user.country = country
+            user.postalcode = postal    
+            
+            db.session.commit()
+
+            db.session.commit()
+            user = User.query.filter_by(email=email).first()
+            flash('Your profile is updated!', category='success')
+
+            return render_template("user_account.html", user=user)
+    else:
+        print ("check point 3")
+        return render_template("user_update.html", user=current_user)
 
 
 # Reza
@@ -249,66 +313,6 @@ def edit():
     return render_template("user_update.html", user = current_user) 
 
 
-@auth.route('/edit-user', methods=['GET','POST'])
-def edit_user():
-    if request.method == 'POST':
-        print ("check point 1")
-        email = request.form.get('email')
-        first_name = request.form.get('firstName')
-        password = request.form.get('password')
-        confirmed_password = request.form.get('confirmedPassword')
-        gender = request.form.get('gender')
-
-        phone = request.form.get('phone')
-        birthday = request.form.get('birthday')
-        adress = request.form.get('adress')
-        city = request.form.get('city')
-        country = request.form.get('country')
-        postal = request.form.get('postal')
-        
-        is_alertifly = request.form.get('is_alertifly')
-        
-        user = User.query.filter_by(email=current_user.email).first()
-        if user is None:
-            return "", "500 Username or Email is already  exist"
-        if current_user.admin == True:
-            return "", "500 You are Admin! your data can not change!!!"
-        elif not email_validation(email):
-            #flash('Your email address is not valid!', category='error')
-            return "", "500 Your email address is not valid!"
-        elif not name_validation(first_name):
-            #flash('Your name is incorrect', category='error')
-            return "", "500 Your name is incorrect"
-        elif password != confirmed_password:
-            #flash('Your passwords do not match!', category='error')
-            return "", "500 Your passwords do not match!"
-        elif password != "" and not password_validation(password)[0]:
-            #flash(password_validation(password)[1], category='error' )
-            return "", "500 " + str(password_validation(password)[1])
-        elif is_alertifly == '1' : 
-           return render_template("user_update.html", user=current_user)
-        else:
-            user.first_name= first_name
-            user.email = email
-            user.password = generate_password_hash(password, method='sha256')
-            user.gender = gender
-            user.phonenumber = phone
-            user.birthday = birthday
-            user.address = adress
-            user.city = city
-            user.country = country
-            user.postalcode = postal    
-            
-            db.session.commit()
-
-            db.session.commit()
-            user = User.query.filter_by(email=email).first()
-            flash('Your profile is updated!', category='success')
-
-            return render_template("user_account.html", user=user)
-    else:
-        print ("check point 3")
-        return render_template("user_update.html", user=current_user)
 
 @auth.route('/admin', methods=['GET', 'POST'])
 def edit_ticket():

@@ -39,16 +39,17 @@
           </div>  
 
 
-           <div class="col-lg-6">
-              <label class="form-label-outside">Phone number</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="phone" id="phone" type="number">
-              </div>
+          <div class="col-lg-6">
+            <label class="form-label-outside">Phone number</label>
+            <div class="form-wrap form-wrap-modern">
+              <input class="form-input input-append" name="phone" id="phone" type="number"
+              value="{{current_user.phonenumber}}" >
             </div>
+          </div>
             <div class="col-lg-6">
               <label class="form-label-outside">zipcode</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="zipcode" id="zipcode" type="text">
+                <input class="form-input input-append"   value="{{current_user.postalcode}}" name="zipcode" id="zipcode" type="text">
            </div>   
           </div>
 
@@ -56,13 +57,13 @@
           <div class="col-lg-6">
               <label class="form-label-outside">city</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="city" id="city" type="text" min="0" max="300">
+                <input class="form-input input-append" value="{{current_user.city}}"  name="city" id="city" type="text" min="0" max="300">
               </div>
             </div>
             <div class="col-lg-6">
               <label class="form-label-outside">country</label>
               <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="country" id="country" type="text" min="0" max="300">
+                <input class="form-input input-append" value="{{current_user.country}}" name="country" id="country" type="text" min="0" max="300">
            </div>   
           </div>
       </div>

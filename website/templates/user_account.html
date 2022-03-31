@@ -12,65 +12,40 @@
         <div class="row row-20 row-fix">
         
           <div class="col-lg-6">
-              <label class="form-label-outside">Email</label>
-              <div class="form-wrap form-wrap-inline">
-                <input class="form-input select-filter" type="email" name="email" id="email" 
-                value="{{current_user.email}}"
-                type="email" data-placeholder="All" data-minimum-results-for-search="Infinity" readonly>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <label class="form-label-outside">Full Name</label>
-              <div class="form-wrap form-wrap-iPline">
-              <input class="form-input select-filter" 
-              value="{{current_user.first_name}}"
-              name="firstName" id="firstName" data-placeholder="All" data-minimum-results-for-search="Infinity" min="2" max="3" readonly>
-              </div>
+              <label class="form-label-outside">Email: </label>
+              <label class="form-wrap form-wrap-iPline">{{current_user.email}}</label>
+          </div>
+        <div class="col-lg-6">
+              <label class="form-label-outside">Full Name: </label>
+              <label class="form-wrap form-wrap-iPline">{{current_user.first_name}}</label>    
           </div>
      
-           <div class="col-lg-6">
-              <label class="form-label-outside">passwrod</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="password" id="password" type="password" min="8" readonly>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <label class="form-label-outside">confirmed Password</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="confirmedPassword" id="confirmedPassword" type="password" min="8" readonly>
-           </div> 
-          </div>  
-
-
-           <div class="col-lg-6">
-              <label class="form-label-outside">Phone number</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="phone" id="phone" type="number"readonly>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <label class="form-label-outside">zipcode</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="zipcode" id="zipcode" type="text"readonly>
-           </div>   
+          <div class="col-lg-6">
+            <label class="form-label-outside">Phone number</label>
+            <label class="form-wrap form-wrap-iPline">{{current_user.phonenumber}}</label>   
           </div>
-
 
           <div class="col-lg-6">
-              <label class="form-label-outside">city</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="city" id="city" type="text" min="0" max="300"readonly>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <label class="form-label-outside">country</label>
-              <div class="form-wrap form-wrap-modern">
-                <input class="form-input input-append" name="country" id="country" type="text" min="0" max="300"readonly>
-           </div>   
+            <label class="form-label-outside">zipcode</label>
+            <label class="form-wrap form-wrap-iPline">{{current_user.zipcode}}</label>   
+        </div>
+
+
+        <div class="col-lg-6">
+            <label class="form-label-outside">city</label>
+            <label class="form-wrap form-wrap-iPline">{{current_user.city}}</label>    
           </div>
+
+          <div class="col-lg-6">
+            <label class="form-label-outside">country</label>
+            <label class="form-wrap form-wrap-iPline">{{current_user.country}}</label>  
+         </div>
+
+
+      
       </div>
 
-      <a id="regissign-up" href="/edit-user" class="signup-image-link" style="font-size: larger;margin-top: 15px;">Go to Edit page</a>            
+      <a id="regissign-up" href="/edit-user" class="button signup-image-link" style="font-size: larger;margin-top: 15px;">Go to Edit page</a>            
          
 
         </div>

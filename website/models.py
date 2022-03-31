@@ -18,6 +18,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(200),  nullable=False)
     first_name = db.Column(db.String(200),  nullable=False)
+    phonenumber = db.Column(db.String(200), nullable=True)
+    city = db.Column(db.String(200), nullable=True)
+    country = db.Column(db.String(200), nullable=True)
+    postalcode = db.Column(db.String(200), nullable=True)
+
     admin = db.Column(db.Boolean, nullable=False, default=False)
     tiket = db.relationship('Ticket')
 
