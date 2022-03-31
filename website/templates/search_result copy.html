@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Search result {% endblock %}
+{% block rd_navbar_nav_active %} <li class="active"><a id="Search_result<" href="/">Search result</a></li> {% endblock %}
+
+{% block content %}
+<div class="row row-fix justify-content-sm-center justify-content-lg-end">
+  <div class="col-lg-12 col-xxl-6">
+    <div class="form-request form-request-modern bg-gray-lighter novi-background">
+     
+      <table class="table">
+        <tr class="table__header">
+            {% for header in headings %}
+            <th class="table__cell">{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr class="table__row" >
+          <td class="table__cell">{{ row.source_name}}</td>
+          <td class="table__cell">{{ row.destination_name }}</td>
+          <td class="table__cell">{{ row.departure_date }}</td>
+          <td class="table__cell">{{ row.return_date }}</td>
+          <td class="table__cell">{{ row.price }}</td>
+          <td class="table__cell">{{ row.airline }}</td>
+          <td><a class=" button button-sm button-secondary button-nina" id="login" href="/flight_information">More Detail<i class="far fa-eye"></i></button></td></a></th>
+          <td><a class="btn btn-success" id="login" href="/payment">Reserve<i class="far fa-eye"></i></button></td></a></th>
+           
+      </tr>
+        {% endfor %}
+    </table>
+    </div>
+  </div>
+{% endblock %}
