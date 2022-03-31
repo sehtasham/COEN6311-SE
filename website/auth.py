@@ -144,7 +144,7 @@ def edit_user():
         first_name = request.form.get('firstName')
         user = User.query.filter_by(email=current_user.email).first()
         if user is None:
-            raise ValueError("error!!")
+            raise ValueError("error the user is empty!!")
         user.first_name= first_name
         user.email = email
         db.session.commit()
@@ -160,6 +160,7 @@ def edit_ticket():
     data2 = (("Montreal","Ottawa","03/26/2022","04/01/2022","200 CAD", "Air Canada"),
             ("Montreal","Toronto","12/26/2022","23/01/2022","150 CAD", "Air Canada"),
             ("Montreal","Vancouver","05/26/2022","07/01/2022","300 CAD", "Air Canada"))
+
     return render_template("admin.html", heading=heading, data=data)
 
 @auth.route('/add-ticket', methods=['GET','POST'])
@@ -198,6 +199,7 @@ def add_ticket_admin():
 
             db.session.add(new_ticket)
             db.session.commit()
+
             flash('You successfully add new ticket', category='success')
             return redirect(url_for('auth.add_ticket'))
 
