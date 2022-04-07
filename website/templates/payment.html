@@ -47,7 +47,16 @@
      display: none;
 
   }
-  
+  select{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: white;
+
+
+  }
   input[type=text] {
     width: 100%;
     margin-bottom: 20px;
@@ -133,9 +142,25 @@
                   <label for="cname">Name on Card</label>
                   <input type="text" id="cname" name="cardname" placeholder="John More Doe">
                   <label for="ccnum">Credit card number</label>
-                  <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                  <input type="text" id="ccnum" name="cardnumber"  onkeyup="formatCreditCard() placeholder="1111-2222-3333-4444">
                   <label for="expmonth">Exp Month</label>
-                  <input type="text" id="expmonth" name="expmonth" placeholder="September">
+
+                  <select id="expmonth" name = "expmonth">
+                    <option name="" value="" style="display:none;"></option>
+                    <option name="January" value="Jan">January</option>
+                    <option name="February" value="Feb">February</option>
+                    <option name="March" value="Mar">March</option>
+                    <option name="April" value="Apr">April</option>
+                    <option name="May" value="May">May</option>
+                    <option name="June" value="Jun">June</option>
+                    <option name="July" value="Jul">July</option>
+                    <option name="August" value="Aug">August</option>
+                    <option name="September" value="Sep">September</option>
+                    <option name="October" value="Oct">October</option>
+                    <option name="November" value="Nov">November</option>
+                    <option name="December" value="Dec">December</option>
+                  </select>
+
                   <div class="row">
                     <div class="col-50">
                       <label for="expyear">Exp Year</label>
@@ -149,7 +174,16 @@
                 </div>
                 
               </div>
-              <input type="submit" value="Continue to checkout" class="btn alertifly-button">
+              
+              <div class="form-wrap form-button">
+                <input type="submit" 
+                name="login" 
+                id="login2" 
+                class="button button-block button-secondary alertifly-button" 
+                value="Continue to checkout"/>
+            </div>
+
+
             </form>
           </div>
         </div>
@@ -177,6 +211,12 @@
   <script>
       $('.website_copyright').get(0).innerHTML = 'W3 schools' 
       $('.website_copyright').get(0).href = 'https://www.w3schools.com/howto/howto_css_checkout_form.asp' 
-
+      $('#ccnum').keypress(function(){
+        var rawNumbers = $(this).val().replace(/-/g,'');
+        var cardLength = rawNumbers.length;
+        if(cardLength !==0 && cardLength <=12 && cardLength % 4 == 0){
+          $(this).val($(this).val()+'-');
+        }
+       });
     </script>
 {% endblock %}
