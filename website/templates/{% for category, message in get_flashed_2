@@ -138,7 +138,7 @@
     }
 
 
-    .neonText {
+    #newFeature {
       #font-size: 4.2rem;
       animation: flicker 2s infinite alternate;     
     }
@@ -327,8 +327,17 @@
                 </li>
                 <li  {% block contacts_active %} {% endblock %}><a id="contacts" href="/contacts">Contacts</a>
                 </li> 
-                {% block home_new_feature %} {% endblock %}
-           
+
+                <a class="trigger_popup_fricc">New Feature</a>
+
+                <div class="hover_bkgr_fricc">
+                    <span class="helper"></span>
+                    <div>
+                        <div class="popupCloseButton">&times;</div>
+                        <p>Add any HTML content<br />inside the popup box!</p>
+                    </div>
+                </div>
+       
  
               {% block rd_navbar_nav_active %} {% endblock %}
 
