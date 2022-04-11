@@ -1,6 +1,7 @@
 from ast import Return
 from crypt import methods
 from ctypes import addressof
+from distutils.log import error
 from signal import raise_signal
 from traceback import print_tb
 
@@ -111,20 +112,24 @@ def user_account():
 @auth.route('/search', methods=['GET'])
 def dropdown():
     seat_type = ['Business', 'Economy', 'Permium']
-    return render_template('search.html', seat_type=seat_type, user = current_user)
+    source = ['Montreal', 'Vancouver', 'Toronto']
+    destination = ['Newyork', 'Seattle', 'Vancouver']
+    return render_template('search.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
 
 @auth.route('/search', methods=['POST'])
 def search_post():
     if request.method == 'POST':
-        heading = ("Name","Price","Type","Note")
-        data = (("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
-                ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
-                ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
-                ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"),
-                ("Air Transat","CAD 251","Non-refundable","Only 3 seat left at this price"),
-                ("Air Canada","CAD 200","Free cancelation","Only 1 seat left"),
-                ("Flair Airlines","CAD 300","Non-refundable","Only 6 seat left at this price on our site"),
-                ("WestJet Airlines","CAD 251","Non-refundable","Only 3 seat left at this price"))
+        heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
+        source = request.form.get('sourceid')
+        destination = request.form.get('destinationid')
+        source = str(source) 
+        data = Tickett.query.filter_by(source_name= source,destination_name= destination).all()
+
+        if not data:          
+            flash('There is no flight available based on your filter', category='error')
+            return redirect(url_for('auth.dropdown'))
+        #raise ValueError(data)
+
     return render_template("search_result.html", heading=heading, data=data)
 
 @auth.route('/update', methods=['GET','POST'])

@@ -1,9 +1,33 @@
 {% extends "base.html" %} 
 {% block title %}login{% endblock %}
 
+{% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{category}}">Message: {{ message }}</div>
+{% endfor %}
+
 {% block content %}
 <form method="POST">
-    <h3 align="center">Search for your desire room!</h3>
+    <h3 align="center">Search for your desire flight!</h3>
+    <div class="form-group">
+        <h3>Select Souce</h3>
+        <form>
+         <select name="sourceid" class="form-select form-select-lg">
+            <option value="{{source[0]}}" selected>{{source[0]}}</option>
+            {% for source in source[1:] %}
+            <option id="sourceid" value="{{source}}">{{source}}</option>
+            {% endfor %}
+         </select>
+       </div>
+       <div class="form-group">
+        <h3>Select destination</h3>
+        <form>
+         <select name="destinationid" class="form-select form-select-lg">
+            <option value="{{destination[0]}}" selected>{{destination[0]}}</option>
+            {% for destination in destination[1:] %}
+            <option id="destinationid" value="{{destination}}">{{destination}}</option>
+            {% endfor %}
+         </select>
+       </div>
     <div class="form-group">
         <h3>Insert number of adults</h3>
         <input 
