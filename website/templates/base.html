@@ -23,7 +23,6 @@
 
  
 
-  
   <link rel="stylesheet" href="static/css/style.css">
   <link rel="stylesheet" href="static/css/fonts.css">
   <link rel="stylesheet" href="static/themes/alertify.core.css">
@@ -435,7 +434,9 @@
 <!-- Javascript <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script> -->
 
+<script src = "https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+  
 
 <script src="static/js/core.min.js"></script>
 <script src="static/js/script.js"></script>
@@ -459,6 +460,21 @@
 
        data [ $('input').get(i).id ] =  $('input').get(i).value ;
     }
+
+    /*if ($('#flight_table').length != 0) {
+
+      var currentRow=$(this).closest("tr");    
+      var id =currentRow.find("td:eq(0)").text();
+      var source_name=currentRow.find("td:eq(1)").text(); 
+      var destination_name=currentRow.find("td:eq(2)").text(); 
+      var departure_date=currentRow.find("td:eq(2)").text(); 
+      var return_date=currentRow.find("td:eq(2)").text(); 
+      var price=currentRow.find("td:eq(2)").text(); 
+      var airline=currentRow.find("td:eq(2)").text();
+      var data = {"firstName":"John", "lastName":"Doe"}
+      data["flight_table"]  = data;
+    }*/
+  
 
     data["is_alertifly"]  = 1;
 
@@ -550,7 +566,7 @@
   
 </script>
 
-{% block other_script %} {% endblock %}
+<script> {% block other_script %} {% endblock %} </script>
 <!-- coded by barber-->
 </body>
 </html>
