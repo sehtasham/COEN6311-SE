@@ -195,7 +195,12 @@ def user_cart():
 
 @auth.route('/payment', methods=['GET','POST'])
 def payment():
-    print (request.args.get('my_var', None))
+    
+    print(request.args)
+    ticket_id =request.args.get('ticket_id' , None)
+    print(ticket_id)
+    ticket = Tickett.query.filter_by(id=ticket_id).first()
+    
     if request.method == 'POST':
         cname = request.form.get('cname')
         cardnumber = request.form.get('ccnum')
@@ -206,7 +211,6 @@ def payment():
         is_alertifly = request.form.get('is_alertifly')
         
         print(is_alertifly)
-        print("reza" , request.form.get('flight_table'))
 
         if is_alertifly is None : 
             flash('You successfully buy the Ticket and it has been added to your profile', category='success')
@@ -236,8 +240,7 @@ def payment():
         #ticket = Tickett.query.filter_by(id=1).first()
         #return ticket.source_name
         #print(request.form)
-        print(request.form.get('flight_table'))
-        return render_template("payment.html")
+        return render_template("payment.html" , ticket = ticket)
 
 @auth.route('/modify_tickets', methods=['GET','POST'])
 def modify_tickets():

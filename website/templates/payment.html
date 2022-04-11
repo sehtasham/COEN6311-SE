@@ -44,7 +44,6 @@
   
   .container.cart {
  
-     display: none;
 
   }
   select{
@@ -189,13 +188,14 @@
         </div>
         <div class="col-25">
           <div class="container cart">
-            <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-            <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-            <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-            <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-            <p><a href="#">Product 4</a> <span class="price">$2</span></p>
-            <hr>
-            <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+            <h4>Ticket <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b></b></span></h4>
+
+            <p><a>Source_name</a> <span class="price">{{ticket.source_name}}</span></p>
+            <p><a>Destination name</a> <span class="price">{{ticket.destination_name}}</span></p>
+            <p><a>Departure_date</a> <span class="price">{{ticket.departure_date}}</span></p>
+            <p><a>Return_date</a> <span class="price">{{ticket.return_date}}</span></p>
+            <p><a>Price</a> <span class="price">{{ticket.price}}</span></p>
+            <p><a>Airline</a> <span class="price">{{ticket.airline}}</span></p>
           </div>
         </div>
       </div>
