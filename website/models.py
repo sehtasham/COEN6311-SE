@@ -1,16 +1,13 @@
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
-
-
-class Ticket(db.Model):
+ 
+    
+class history_ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    source_name = db.Column(db.String(10000))
-    destination_name = db.Column(db.String(10000))
-    departure_date = db.Column(db.DateTime(timezone=True), default=func.now())
-    return_date = db.Column(db.DateTime(timezone=True), default=func.now())
-    price = db.Column(db.Numeric(10,2))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'))
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
 
 
 class User(db.Model, UserMixin):
@@ -22,10 +19,7 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(200), nullable=True)
     country = db.Column(db.String(200), nullable=True)
     postalcode = db.Column(db.String(200), nullable=True)
-
     admin = db.Column(db.Boolean, nullable=False, default=False)
-    tiket = db.relationship('Ticket')
-
 
 class Flight(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -44,7 +38,7 @@ class Note(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     flight_id = db.Column(db.Integer, db.ForeignKey('flight.id'))
 
-class Tickett(db.Model):
+class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     source_name = db.Column(db.String(10000))
     destination_name = db.Column(db.String(10000))

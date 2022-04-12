@@ -42,11 +42,15 @@
                       <div class="form-wrap form-wrap-validation">
                         <label class="form-label-outside">From</label>
                         <div class="form-wrap form-wrap-inline">
-                          <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                            <option value="1">New York</option>
-                            <option value="2">Lisbon</option>
-                            <option value="3">Stockholm</option>
-                          </select>
+                         
+                          <select name="source_name" id="name="source_name" class="form-input select-filter"  data-minimum-results-for-search="Infinity" name="city">
+                            <option value="{{source[0]}}" selected>{{source[0]}}</option>
+                            {% for source in source[1:] %}
+                            <option id="sourceid" value="{{source}}">{{source}}</option>
+                            {% endfor %}
+                         </select>
+
+
                         </div>
                       </div>
                   </div>
@@ -55,11 +59,12 @@
                     <div class="form-wrap form-wrap-validation">
                       <label class="form-label-outside">To</label>
                       <div class="form-wrap form-wrap-inline">
-                        <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                          <option value="1">Chicago</option>
-                          <option value="2">Madrid</option>
-                          <option value="3">Paris</option>
-                        </select>
+                        <select name="destination_name" id="destination_name" class="form-input select-filter"  data-minimum-results-for-search="Infinity" name="city">
+                          <option value="{{destination[0]}}" selected>{{destination[0]}}</option>
+                          {% for destination in destination[1:] %}
+                          <option id="destinationid" value="{{destination}}">{{destination}}</option>
+                          {% endfor %}
+                       </select>
                       </div>
                     </div>
                   </div>
@@ -93,7 +98,7 @@
                     <label class="form-label-outside">Duration</label>
                     <div class="form-wrap form-wrap-validation">
                       <!-- Select 2-->
-                      <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
+                      <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="duration">
                         <option value="1">Any length</option>
                         <option value="2">2 days</option>
                         <option value="3">3 days</option>
@@ -117,8 +122,8 @@
                   </div>
                 </div>
 
-                <div class="form-wrap form-button"><a class="button button-block button-secondary" id="search" href="/search_post">Search Flights</a></div>
-                
+                <div class="form-wrap form-button "><a class="button button-block button-secondary alertifly-button_search" id="search" href="/search_post">Search Flights</a></div>
+          
               </form>
             </div>
           </div>

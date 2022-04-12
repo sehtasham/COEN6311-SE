@@ -139,9 +139,9 @@
                     <i class="fa fa-cc-discover" style="color:orange;"></i>
                   </div>
                   <label for="cname">Name on Card</label>
-                  <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                  <input type="text" id="cname" name="cname" placeholder="John More Doe">
                   <label for="ccnum">Credit card number</label>
-                  <input type="text" id="ccnum" name="cardnumber"  onkeyup="formatCreditCard() placeholder="1111-2222-3333-4444">
+                  <input type="text" id="ccnum" name="ccnum"  onkeyup="formatCreditCard() placeholder="1111-2222-3333-4444">
                   <label for="expmonth">Exp Month</label>
 
                   <select id="expmonth" name = "expmonth">
@@ -181,8 +181,6 @@
                 class="button button-block button-secondary alertifly-button" 
                 value="Continue to checkout"/>
             </div>
-
-
             </form>
           </div>
         </div>
@@ -208,7 +206,7 @@
 {% endblock %}
 
 {% block other_script %}
-  <script>
+ 
       $('.website_copyright').get(0).innerHTML = 'W3 schools' 
       $('.website_copyright').get(0).href = 'https://www.w3schools.com/howto/howto_css_checkout_form.asp' 
       $('#ccnum').keypress(function(){
@@ -218,5 +216,5 @@
           $(this).val($(this).val()+'-');
         }
        });
-    </script>
+   
 {% endblock %}

@@ -175,10 +175,7 @@ def edit_user():
 # Reza
 @auth.route('/', methods=['GET','POST'])
 def home():
-    seat_type = ['Business', 'Economy', 'Permium','reza']
-    source = ['Montreal', 'Vancouver', 'Toronto','Newyork', 'Seattle','Babol', 'Babolsar','Amol']
-    destination = ['Montreal', 'Vancouver', 'Toronto','Newyork', 'Seattle','Babol', 'Babolsar','Amol']
-    return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
+     return render_template("home.html")
 
 
 @auth.route('/contacts', methods=['GET','POST'])
@@ -279,6 +276,8 @@ def profile():
 
 @auth.route('/faq', methods=['GET','POST'])
 def faq():
+    my_var = session.get('my_var', None)
+    return my_var
     return render_template("faq.html")
 
 #ehtesham
@@ -286,39 +285,14 @@ def faq():
 
 @auth.route('/home', methods=['GET'])
 def dropdown():
-    seat_type = ['Business', 'Economy', 'Permium']
-    source = ['Montreal', 'Vancouver', 'Toronto']
-    destination = ['Newyork', 'Seattle', 'Vancouver','Babolsar', 'Babol']
-    return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
+    seat_type = ['Business', 'Economy', 'Permium', 'reza']
+    return render_template('search.html', seat_type=seat_type, user = current_user)
 
 @auth.route('/search_post', methods=['GET','POST'])
 def search_post():
-    
-    is_alertifly = request.form.get('is_alertifly')
     #if request.method == 'POST':
-    heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
-    source = request.form.get('source_name')
-    destination = request.form.get('destination_name')
-    seat_type = request.form.get('seat_type')
-    duration = request.form.get('duration')
-    dateForm = request.form.get('dateForm')
-    
-    is_alertifly = request.form.get('is_alertifly')
-    
-    data = Ticket.query.filter_by(source_name = source).all()
-    #print("reza" ,  request.form)
-    #data = Ticket.query.all()
-    print("check 1")
-    if len(data) == 0:
-            print("check 2")
-            #flash('There is no flight available based on your filter', category='error')
-            return "There is no flight available based on your filter", 500
-            #return redirect(url_for('auth.home'))
-    elif is_alertifly == '1' :
-            print("check 21")
-            return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
-    
-    print("check 3")
+    heading = ("id","source_name","destination_name","departure_date","return_date", "price", "airline")
+    data = Ticket.query.all()
     return render_template("search_result.html", heading=heading, data=data)
 
 # Maryam:

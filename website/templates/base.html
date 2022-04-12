@@ -347,7 +347,7 @@
            <ul class="dropdown-menu">
              <li style="text-align: -webkit-center;"><a href="/user-account" >User account </a></li>
              <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/edit-user" > Edit profile</a></li>
-    
+             <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/user_cart" > User Cart</a></li>
              <li style="text-align: -webkit-center; margin-top: 10px;"><a href="/logout" > Log out </a></li>
              {% if current_user.admin %}
              <hr style="margin-top:10px">
@@ -461,21 +461,6 @@
        data [ $('input').get(i).id ] =  $('input').get(i).value ;
     }
 
-    /*if ($('#flight_table').length != 0) {
-
-      var currentRow=$(this).closest("tr");    
-      var id =currentRow.find("td:eq(0)").text();
-      var source_name=currentRow.find("td:eq(1)").text(); 
-      var destination_name=currentRow.find("td:eq(2)").text(); 
-      var departure_date=currentRow.find("td:eq(2)").text(); 
-      var return_date=currentRow.find("td:eq(2)").text(); 
-      var price=currentRow.find("td:eq(2)").text(); 
-      var airline=currentRow.find("td:eq(2)").text();
-      var data = {"firstName":"John", "lastName":"Doe"}
-      data["flight_table"]  = data;
-    }*/
-  
-
     data["is_alertifly"]  = 1;
 
     $.ajax({
@@ -495,6 +480,42 @@
 });
 
 </script>
+
+
+
+<script type="text/javascript">
+  $('.alertifly-button_search').on("click", function(e) {
+    e.preventDefault();
+    var data = {};
+    
+    
+    data["source_name"] = $($('.select2-selection__rendered').get(0)).text()
+    data["destination_name"] = $($('.select2-selection__rendered').get(1)).text()
+    data["seat_type"] = $($('.select2-selection__rendered').get(2)).text()
+    data["duration"] = $($('.select2-selection__rendered').get(3)).text()
+    data["dateForm"] = $('#dateForm').val()
+    data["is_alertifly"]  = 1;
+
+    $.ajax({
+        type:'POST',
+        data: data ,
+        url: '/search_post',
+        success:function(result,a,b)
+        {
+          //document.write(response);
+          $('.alertifly-button_search').off()
+          $('.alertifly-button_search').click()
+          alertify.success("Success log message")
+        },
+        error: function (xhr, status, error) {
+          alertify.error(xhr.responseText);
+        }
+    })
+});
+
+</script>
+
+
 
 <script>
   $(window).load(function () {
