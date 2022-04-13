@@ -272,7 +272,7 @@ def dropdown():
 @auth.route('/', methods=['GET','POST'])
 def home():
     if request.method == 'POST':
-        heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
+        heading = ("Source","Destination","Departure date","Return date", "Price", "Airline")
         source = request.form.get('source_name')
         destination = request.form.get('destination_name')
         seat_type = request.form.get('seat_type')
@@ -311,10 +311,10 @@ def home():
             flash('There is no flight available based on your filter', category='error')
             #return "There is no flight available based on your filter", 500
             #return redirect(url_for('auth.search_post'))
-            return render_template("search_result.html", heading=heading, data=data)
+            return render_template("search_result.html", headings=heading, data=data)
     
         print("check 3")
-        return render_template("search_result.html", heading=heading, data=data)
+        return render_template("search_result.html", headings=heading, data=data)
     
     else :
         seat_type = ['Business', 'Economy', 'Permium','reza']
@@ -332,7 +332,7 @@ def search_post():
         if len(data) == 0:
                 flash('There is no flight available based on your filter', category='error')
                 return render_template("search_result.html", heading=heading, data=data)
-        return render_template("search_result.html", heading=heading, data=data)
+        return render_template("search_result.html", headings=heading, data=data)
 
 # Maryam:
 @auth.route('/user-account', methods=['GET','POST'])
