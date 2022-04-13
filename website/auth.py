@@ -1,26 +1,11 @@
-from ast import Return
-from crypt import methods
-from ctypes import addressof
-from logging.config import valid_ident
-from pickle import FALSE
-from time import process_time_ns
-from traceback import print_tb
-from matplotlib import ticker
-from matplotlib.axis import Tick
 
-from requests import head
-from datetime import datetime
-
-from .validations import *
-from unicodedata import category
-from xmlrpc.client import boolean
 from flask import Blueprint, render_template,request, flash, redirect, url_for,Response,session
 from . import db
 from .models import User
 from .models import Ticket,history_ticket
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
-
+from .validations import *
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET','POST'])
