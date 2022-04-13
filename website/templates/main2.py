@@ -5,11 +5,9 @@ from logging.config import valid_ident
 from pickle import FALSE
 from time import process_time_ns
 from traceback import print_tb
-from matplotlib import ticker
-from matplotlib.axis import Tick
 
 from requests import head
-from datetime import datetime
+
 
 from .validations import *
 from unicodedata import category
@@ -173,6 +171,16 @@ def edit_user():
     else:
         return render_template("user_update.html", user=current_user)
 
+
+# Reza
+@auth.route('/', methods=['GET','POST'])
+def home():
+    seat_type = ['Business', 'Economy', 'Permium','reza']
+    source = ['Montreal', 'Vancouver', 'Toronto','Newyork', 'Seattle','Babol', 'Babolsar','Amol']
+    destination = ['Montreal', 'Vancouver', 'Toronto','Newyork', 'Seattle','Babol', 'Babolsar','Amol']
+    return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
+
+
 @auth.route('/contacts', methods=['GET','POST'])
 def contacts():
      return render_template("contacts.html")
@@ -283,71 +291,35 @@ def dropdown():
     destination = ['Newyork', 'Seattle', 'Vancouver','Babolsar', 'Babol']
     return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
 
-# Reza
-@auth.route('/', methods=['GET','POST'])
-def home():
-    if request.method == 'POST':
-        heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
-        source = request.form.get('source_name')
-        destination = request.form.get('destination_name')
-        seat_type = request.form.get('seat_type')
-        end_date = request.form.get('end_date')
-        start_date = request.form.get('start_date')
-    
-        is_alertifly = request.form.get('is_alertifly')
-        
-        
-       # start_date2 = datetime.strptime(start_date, '%m-%d-%Y')
-        #end_date = datetime.strptime(end_date, '%m-%d-%Y')
-        
-        print("reza",source,destination)
-        if start_date is None or start_date == "":
-            start_date = "00-00-0000"
-        if end_date is None or end_date == "":
-            end_date = "99-99-9999"
-        data = []
-        
-        if source != "Choose the source" and destination != "Choose the destination":
-            data = Ticket.query.filter_by( destination_name = destination,source_name = source).filter(Ticket.departure_date >= start_date, Ticket.return_date <= end_date).all()
-        elif source != "Choose the source" :
-            data = Ticket.query.filter_by(source_name = source).filter(Ticket.departure_date >= start_date, Ticket.return_date <= end_date).all()
-        elif destination != "Choose the destination":
-            data = Ticket.query.filter_by( destination_name = destination).filter(Ticket.departure_date >= start_date, Ticket.return_date <= end_date).all()
-        else: 
-            data = Ticket.query.filter(Ticket.departure_date >= start_date, Ticket.return_date <= end_date).all()
-
-      
-        #data = Ticket.query.filter_by(source_name = source,).filter(Ticket.departure_date >= start_date, Ticket.return_date <= end_date).all()
-
-        #data = Ticket.query.filter(Ticket.departure_date >= start_date).all()
-
-        
-        if len(data) == 0:
-            flash('There is no flight available based on your filter', category='error')
-            #return "There is no flight available based on your filter", 500
-            #return redirect(url_for('auth.search_post'))
-            return render_template("search_result.html", heading=heading, data=data)
-    
-        print("check 3")
-        return render_template("search_result.html", heading=heading, data=data)
-    
-    else :
-        seat_type = ['Business', 'Economy', 'Permium','reza']
-        source = ['Montreal', 'Vancouver', 'Toronto','Newyork', 'Seattle','Babol', 'Babolsar','Amol']
-        destination = ['Montreal', 'Vancouver', 'Toronto','Newyork', 'Seattle','Babol', 'Babolsar','Amol']
-        return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
-    
 @auth.route('/search_post', methods=['GET','POST'])
 def search_post():
-    if request.method == 'POST':
-        print("post")
-    else:
-        heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
-        data = Ticket.query.all()       
-        if len(data) == 0:
-                flash('There is no flight available based on your filter', category='error')
-                return render_template("search_result.html", heading=heading, data=data)
-        return render_template("search_result.html", heading=heading, data=data)
+    
+    is_alertifly = request.form.get('is_alertifly')
+    #if request.method == 'POST':
+    heading = ("source_name","destination_name","departure_date","return_date", "price", "airline")
+    source = request.form.get('source_name')
+    destination = request.form.get('destination_name')
+    seat_type = request.form.get('seat_type')
+    duration = request.form.get('duration')
+    dateForm = request.form.get('dateForm')
+    
+    is_alertifly = request.form.get('is_alertifly')
+    
+    data = Ticket.query.filter_by(source_name = source).all()
+    #print("reza" ,  request.form)
+    #data = Ticket.query.all()
+    print("check 1")
+    if len(data) == 0:
+            print("check 2")
+            flash('There is no flight available based on your filter', category='error')
+            #return "There is no flight available based on your filter", 500
+            #return redirect(url_for('auth.home'))
+    elif is_alertifly == '1' :
+            print("check 21")
+            return render_template('home.html', seat_type=seat_type,source=source, destination=destination, user = current_user)
+    
+    print("check 3")
+    return render_template("search_result.html", heading=heading, data=data)
 
 # Maryam:
 @auth.route('/user-account', methods=['GET','POST'])

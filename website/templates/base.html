@@ -40,6 +40,9 @@
 
   <style>
 
+
+
+
     /* Popup box BEGIN */
 .hover_bkgr_fricc{
     background:rgba(0,0,0,.4);
@@ -166,7 +169,8 @@
 
     .form-request.form-request-modern.bg-gray-lighter.novi-background{
       max-height: 750px !important;
-      overflow: scroll !important;;
+      overflow: scroll !important;
+      max-width : 100%;%
     }
    
 
@@ -484,7 +488,7 @@
 
 
 <script type="text/javascript">
-  $('.alertifly-button_search').on("click", function(e) {
+  $('.alertifly-button-search').on("click", function(e) {
     e.preventDefault();
     var data = {};
     
@@ -503,8 +507,8 @@
         success:function(result,a,b)
         {
           //document.write(response);
-          $('.alertifly-button_search').off()
-          $('.alertifly-button_search').click()
+          $('.alertifly-button-search').off()
+          $('.alertifly-button-search').click()
           alertify.success("Success log message")
         },
         error: function (xhr, status, error) {

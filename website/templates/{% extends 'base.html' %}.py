@@ -44,9 +44,9 @@
                         <div class="form-wrap form-wrap-inline">
                          
                           <select name="source_name" id="source_name" class="form-input select-filter"  data-minimum-results-for-search="Infinity" name="city">
-                            <option id="sourceid" name="sourceid" value="Choose the source">Choose the sou</option>
-                            {% for source in source %}
-                            <option id="sourceid" name="sourceid" value="{{source}}">{{source}}</option>
+                            <option value="{{source[0]}}" selected>{{source[0]}}</option>
+                            {% for source in source[1:] %}
+                            <option id="sourceid" value="{{source}}">{{source}}</option>
                             {% endfor %}
                          </select>
 
@@ -60,8 +60,8 @@
                       <label class="form-label-outside">To</label>
                       <div class="form-wrap form-wrap-inline">
                         <select name="destination_name" id="destination_name" class="form-input select-filter"  data-minimum-results-for-search="Infinity" name="city">
-                          <option id="destinationid" value="Choose the destination">Choose the destination</option>
-                          {% for destination in destination %}
+                          <option value="{{destination[0]}}" selected>{{destination[0]}}</option>
+                          {% for destination in destination[1:] %}
                           <option id="destinationid" value="{{destination}}">{{destination}}</option>
                           {% endfor %}
                        </select>
@@ -74,7 +74,7 @@
                     <div class="form-wrap form-wrap-inline">
                       <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
                         <option value="{{seat_type[0]}}" selected>{{seat_type[0]}}</option>
-                        {% for seat_type in seat_type%}
+                        {% for seat_type in seat_type[1:] %}
                         <option value="{{seat_type}}">{{seat_type}}</option>
                         {% endfor %}
                       </select>
@@ -83,11 +83,11 @@
 
                   
                   <div class="col-sm-12 col-lg-6">
-                    <label class="form-label-outside">(Minimum) Depart Date</label>
+                    <label class="form-label-outside">Depart Date</label>
                     <div class="form-wrap form-wrap-validation">
                       <!-- Select -->
-                      <input class="form-input" id="start_date" name="start_date" type="text" data-time-picker="date">
-                      <label class="form-label" for="start_date">Choose the date</label>
+                      <input class="form-input" id="dateForm" name="date" type="text" data-time-picker="date">
+                      <label class="form-label" for="dateForm">Choose the date</label>
                       <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
                       <!--  option(value="1") Choose the date-->
                       <!--  option(value="2") Primary-->
@@ -95,15 +95,15 @@
                     </div>
                   </div>
                   <div class="col-sm-12 col-lg-6">
-                    <label class="form-label-outside"> (Maximum) Return Date</label>
+                    <label class="form-label-outside">Duration</label>
                     <div class="form-wrap form-wrap-validation">
-                      <!-- Select -->
-                      <input class="form-input" id="end_date" name="end_date" type="text" data-time-picker="date">
-                      <label class="form-label" for="end_date">Choose the date</label>
-                      <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
-                      <!--  option(value="1") Choose the date-->
-                      <!--  option(value="2") Primary-->
-                      <!--  option(value="3") Middle-->
+                      <!-- Select 2-->
+                      <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="duration">
+                        <option value="1">Any length</option>
+                        <option value="2">2 days</option>
+                        <option value="3">3 days</option>
+                        <option value="4">4 days</option>
+                      </select>
                     </div>
                   </div>
 
@@ -122,14 +122,22 @@
                   </div>
                 </div>
 
-                <div class="form-wrap form-button">
-                  <input type="submit" 
-                  name="login" 
-                  id="login2" 
-                  class="button button-block button-secondary" 
-                  value="Search Flights"/>
-              </div>
-        
+                <form action="/search_post">
+
+                  <select name="source_name" id="source_name">
+                    {% for source in source %}
+                    <option id="sourceid" value="{{source}}">{{source}}</option>
+                    {% endfor %}
+                 </select>
+
+                 
+                <div class="form-wrap form-button "><a class="button button-block button-secondary" id="search"
+                  
+                  href = {{ url_for('auth.search_post', source = source[0] ) }}
+                 
+                  >Search Flights</a></div>
+                </form>
+          
               </form>
             </div>
           </div>
